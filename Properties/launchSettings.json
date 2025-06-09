@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "breeze_frontend": {
+    "tnki_line_sale_frontend": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
