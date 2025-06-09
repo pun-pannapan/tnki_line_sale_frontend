@@ -1,0 +1,67 @@
+﻿@model tnki_line_sale_frontend.Models.CustProfileModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="main-subnav">
+    <div class="wrapper">
+        <div class="d-flex align-items-center header-subnav">
+            <a href="Profile"><img src="~/assets/img/backWh.svg" alt="" style="height: 18px;"></a><span class="font-nivea">ประวัติการแลกของรางวัล</span>
+        </div>
+    </div>
+</header>
+<div class="wrapper body-shadow main-body"> 
+    <div class="main-body-inner-page" style="padding: 20px;">
+        <div class="text-center ">
+            <div class="profile-hist-img">
+                <img data-bind="attr: {src: myObject.custData.custLineImg}" alt="">
+            </div>
+            <h3 class="profile-name mt-1 mb-1" data-bind="text: myObject.custData.custLineDisplayName"></h3>
+        </div>
+        <div data-bind="foreach: myObject.lstHistRedeem">
+            <div class="profile-box mt-2" style="font-size: 22px;">
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/calendar.png" alt=""><span>วันที่ทำรายการ</span></div>
+                    <div class="value" data-bind="text: redmHistCreateDate_str"></div>
+                </div>
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/store.png" alt=""><span>ของรางวัล</span></div>
+                    <div class="value" data-bind="text: rewardName"></div>
+                </div>
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/status.png" alt=""><span>เลขที่จัดส่ง</span></div>
+                    <div class="value" data-bind="text: redmHistTracking"></div>
+                </div>
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/status.png" alt=""><span>ติดตามพัสดุ</span></div>
+                    <div class="value">
+                        <a data-bind="attr: {href: deliveryTracking}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+        }
+        $(document).ready(function () {
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+             
+             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/HistRedeem', '', 'HistRedeem');
+            $('#profile').css({
+                "text-decoration": "underline"
+            });
+        });
+    });
+    </script>
+}

@@ -1,0 +1,269 @@
+﻿@model tnki_line_sale_frontend.Models.UploadRecEdit
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper body-shadow main-body">
+    <div class="p-2">
+        <div class="text-center">
+            <img class="img-fluid" src="~/assets/img/hd_logo.svg?v=1002" alt="" width="200">
+        </div>
+        <div class="profile-box mt-2 profile-point" style="margin-bottom: 80px;">
+            <div class="text-center ">
+                <h2 class="text-secondary mb-0 font-bold">
+                    <span>ส่งใบเสร็จ</span>
+                </h2>
+
+                <h4>*การส่งใบเสร็จต้องเป็นใบเสร็จจากร้าน<br />ที่มีการจดทะเบียนอย่างถูกต้องตามกฎหมายเท่านั้น <br />และไม่รับใบเสร็จที่เป็นรูปแบบเขียนด้วยลายมือทุกชนิด</h4>
+            </div>
+            <div class="bg-white p-2 rounded mx-1 my-1">
+                <div class="p-2 form-item">
+                    <div class="d-flex align-items-center" style=" margin-bottom: 0px;">
+                        <label class="mb-0 ml-3">
+                            1. เลือก/ถ่ายรูปใบเสร็จ
+                        </label>
+                    </div>
+                    <h4 style=" margin-bottom: 0px;">
+                        กรุณาส่งภาพใบเสร็จจำนวน 1 ใบเท่านั้น
+                    </h4>
+                    <h4 style=" margin-bottom: 0px;">
+                        *กรณีใบเสร็จยาว สามารถเพิ่มรูปได้สูงสุด 5 รูป
+                    </h4>
+                    <div align="center">
+                        <a href="#" style="font-size: 23px; color: #00379a; text-decoration: underline;" data-bind="click:  myObject.showSampleRec">
+                            ดูตัวอย่างการส่งใบเสร็จ
+                        </a>
+                    </div>
+                    <div class="mt-3 file-upload-wrapper-1">
+                        <div id="kv-error-1" style="margin-top:10px;display:none"></div>
+                        <div id="kv-success-1" class="alert alert-success" style="margin-top:10px;display:none"></div>
+                        <div class="text-center">
+                            <input id="input-700" name="kartik-input-700[]" type="file" accept="image/*" multiple>
+                        </div>
+                    </div>
+                    <div class="form-item mt-3 mb-3" data-bind='validationOptions: { insertMessages: false }'>
+                        <div class="d-flex align-items-center">
+
+                            <label class="mb-0 ml-3">
+                                2. เลือกร้านค้าที่ท่านซื้อสินค้า
+                            </label>
+                        </div>
+                        <div class="select-wrapper mt-2">
+                            <select class="form-control select" id="ddlStore" data-bind="
+                                                                'options':  myObject.lstStore,
+                                                                'optionsText': function(item) {return item.storeName; },
+                                                                 'optionsCaption': 'กรุณาเลือกร้านค้า',
+                                                                'optionsValue': function(item) {
+                                                                    return item.storeGuid; },
+                                                                'value': myObject.storeGuid"></select>
+                        </div>
+                        <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.storeGuid"></span>
+                    </div>
+                    <button class="btn btn-primary btn-animate w-100" style="font-size: 25px;" data-bind="click: myObject.confirm, enable: myObject.isEnable">ส่งใบเสร็จ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="modal-sample-rec" align="center">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin: 0px !important;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2>
+                    คำแนะนำในการส่งใบเสร็จ
+                </h2>
+                <div class="text" align="left" style="padding: 10px 15px;">
+                    เพื่อความสะดวกในการตรวจสอบใบเสร็จ กรุณาถ่ายรูป/บันทึกภาพหน้าจอให้เห็นทั้งใบเสร็จ <font style="text-decoration: underline; ">โดยให้เห็นรายการสินค้า จำนวนสินค้า และเลขที่ใบเสร็จชัดเจน</font>
+                    <p style="color: red;">
+                        สำหรับกิจกรรม Top Spender ผู้เข้าร่วมต้องเก็บใบเสร็จรับเงิน/ใบกำกับภาษีตัวจริงไว้ทุกครั้ง เพื่อใช้เป็นหลักฐานในการเข้าร่วมงานหากชนะกิจกรรม
+                    </p>
+                    <h4 class="font-bold">
+                        1. ตัวอย่างใบเสร็จสินค้าช่องทางเซเว่นอีเลฟเว่น
+                    </h4>
+                    <ul>
+                        <li>ถ่ายรูปให้เห็นทั้งใบเสร็จ</li>
+                        <li>บันทึกภาพหน้าจอ (Capture) จากเมนูใบเสร็จ ในแอปฯ 7-Eleven สำหรับช่องทาง 7-Delevery </li>
+                        <li>
+                            บันทึกภาพหน้าจอ (Capture จากประวัติการสั่งซื้อ > ดูรายละเอียด > กดดาวน์โหลดใบเสร็จรับเงิน/ใบกำกับภาษีอิเล็กทรอนิกส์อย่างอย่างย่อ (pdf) สำหรับช่องทาง ALL Online
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_711.png" />
+                        <img class="w-100 mt-2" src="~/assets/img/SampleRec/Rec_711Delivery.png" />
+                        <img class="w-100 mt-2" src="~/assets/img/SampleRec/Rec_711AllOnline.png" />
+                    </div>
+                    <h4 class="font-bold mt-4">
+                        2. ตัวอย่างใบเสร็จสินค้า ช่องทาง Big C
+                    </h4>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_BigC.png?v=1001" />
+                    </div>
+
+                    <h4 class="font-bold mt-4">
+                        3. ตัวอย่างใบเสร็จสินค้า ช่องทาง Lotus’s
+                    </h4>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_Lotus.png?v=1001" />
+                    </div>
+
+                    <h4 class="font-bold mt-4">
+                        4. ตัวอย่างใบเสร็จสินค้า ช่องทาง Makro
+                    </h4>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_Makro.png?v=1001" />
+                    </div>
+
+                    <h4 class="font-bold mt-4">
+                        5. ตัวอย่างใบเสร็จสินค้า ช่องทาง Lazada
+                    </h4>
+                    <ul>
+                        <li>
+                            บัญชี > รายการสั่งซื้อทั้งหมด > รายละเอียดคำสั่งซื้อ > บันทึกภาพหน้าจอ (Capture)
+                        </li>
+                        <li style="color: red;">
+                            สำหรับใบเสร็จ ลูกค้าจะต้องทักแชทแอดมินในแอพ Lazada เพื่อขอด้วยตนเองหรือสแกนผ่าน QR Code นี้เท่านั้น ให้ปริ้นและเก็บใบเสร็จที่จะได้ไว้เป็นหลักฐานในการยืนยัน ทุกครั้ง
+                        </li>
+                        <li>กรอกฟอร์มในลิ้งค์ <a style="text-decoration: underline;" href="https://docs.google.com/forms/d/e/1FAIpQLSfDWqt23GH93PUHf2SAVsgQ3Ht5NYRmyj3WSqhv2CitHROgtw/viewform" target="_blank">แบบฟอร์มขอใบรับเงิน</a> หรือสแกน QR Code ด้านล่าง หรือทักแชทในแอพ Lazada ร้าน Unilever Home</li>
+                        <li>ใบเสร็จจะถูกส่งเข้าไปในอีเมลที่กรอกในฟอร์มภายใน 3-5 วันทำการ</li>
+                        <li>ปริ้นใบเสร็จเพื่อนำไปแสดงเพื่อรับรางวัลที่หน้างาน</li>
+                    </ul>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_Lazada.png?v=1001" />
+                    </div>
+
+                    <h4 class="font-bold mt-4">
+                        6. ตัวอย่างใบเสร็จสินค้า ช่องทาง Shopee
+                    </h4>
+                    <ul>
+                        <li>ฉัน > การซื้อของฉัน > รายละเอียดคำสั่งซื้อ > บันทึกภาพหน้าจอ (Capture)</li>
+                        <li style="color: red;">
+                            ใบกำกับภาษีแบบเต็มรูปแบบจะถูกส่งไปพร้อมกับสินค้า ให้เก็บใบกับกับภาษีที่แนบไปกับพัสดุไว้เป็นหลักฐานในการยืนยันทุกครั้ง
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_Lazada.png?v=1001" />
+                    </div>
+
+                    <div align="center">
+                        <h3 class="font-bold mt-4" style="text-decoration: underline;">
+                            ใบเสร็จ/บิลเงินสด ที่เขียนด้วยลายมือทุกชนิด ไม่สามารถใช้ในการร่วมกิจกรรมได้
+                        </h3>
+                    </div>
+                    <div class="text-center">
+                        <img class="w-100" src="~/assets/img/SampleRec/Rec_Bill.png?v=1001" />
+                    </div>
+                </div>
+                <div class="m-3 mb-5">
+                    <button class="btn btn-primary  btn-animate w-100" data-dismiss="modal"> <span>ปิด</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="modal-uploadSuccess" style="margin-top: 25% !important;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-bind="click: myObject.gotoHistory"><img class="img-fluid" src="~/assets/img/cancel.svg" alt=""></button>
+            <div class="modal-body">
+                <h2>ส่งใบเสร็จเรียบร้อยแล้ว</h2>
+                <div class="text" align="center">
+                    <h4 style="font-weight: bold; font-size: 23px !important;">
+                        ได้รับใบเสร็จของท่านเรียบร้อยแล้ว <br />แอดมินจะทำการตรวจสอบภายใน 24 ชม.<br /> (เวลาทำการ จ.-ศ.)
+                    </h4>
+                    <div class="text-center ">
+                        <a class="btn btn-primary btn-animate d-block" href="#" data-bind="click: myObject.refreshPage"><span>ส่งใบเสร็จเพิ่ม</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+
+        }
+        $(document).ready(function () {
+            var $el1 = $("#input-700");
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                self.myObject.showSampleRec = function () {
+                    $("#modal-sample-rec").modal({ backdrop: 'static', keyboard: false }, 'show');
+                    return true;
+                }
+                myObject.gotoHistory = function () {
+                    window.location.href = _app.baseURL + 'Home/History';
+                }
+                myObject.refreshPage = function () {
+                    window.location.href = _app.baseURL + 'Home/UploadRec';
+                }
+                self.myObject.confirm = function () {
+                    $el1.fileinput("upload");
+                };
+                myObject.isEnable = ko.computed(function () {
+                    return myObject.storeGuid() != undefined && myObject.storeGuid() != null;
+                }, this);
+                myObject.storeGuid.extend({
+                    required: {
+                        message: "* จำเป็น"
+                    }
+                });
+                myObject.storeGuid.valueHasMutated();
+            }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/UploadRecEdit', '', 'UploadRecEdit');
+
+            $el1.fileinput({
+                uploadUrl: _app.baseAPI + 'home/ReceiptEdit_Upload',
+                uploadExtraData: function () {
+                    return {
+                        storeGuid: myObject.storeGuid(),
+                        reqGuid: myObject.reqGuid()
+                    }
+                },
+                minFileCount: 1,
+                uploadAsync: false,
+                removeLabel: '<i class="far fa-trash-alt mr-2"></i> ลบทั้งหมด',
+                cancelLabel: '<i class="far fa-trash-alt mr-2"></i> ยกเลิก ',
+                showPreview: true,
+                maxFileCount: 10,
+                browseLabel: '<i class="fas fa-plus mr-2"></i>',
+                browseOnZoneClick: true,
+                showUpload: false,
+                overwriteInitial: false,
+                showCaption: false,
+                showCancel: false,
+                resizeImage: true,
+                maxImageHeight: 1200,
+                mergeAjaxCallbacks: true,
+                ajaxSettings: {
+                    beforeSend(xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN'));
+                    }
+                },
+                elErrorContainer: '#kv-error-1'
+            }).on('filebatchuploadsuccess', function (event, data, id, index) {
+                $("#modal-uploadSuccess").modal({ backdrop: 'static', keyboard: false }, 'show');
+            }).on('filebatchpreupload', function (event, data) {
+                var n = data.files.length;
+
+                if (n == 0 || !self.myObject.storeGuid.isValid()) {
+                    var msg = "กรุณาอัพโหลดรูปใบเสร็จและเลือกร้านค้าที่ท่านซื้อสินค้าก่อน";
+                    toastr["error"](msg);
+                }
+            });
+        });
+        $('.numeric').numeric();
+        $('#upload').css({
+            "text-decoration": "underline"
+        });
+    });
+    </script>
+}

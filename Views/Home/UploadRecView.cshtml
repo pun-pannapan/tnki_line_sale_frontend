@@ -1,0 +1,66 @@
+﻿@model tnki_line_sale_frontend.Models.RecDataDetail
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper body-shadow main-body">
+    <div class="p-2">
+        <div class="text-center">
+            <img class="img-fluid" src="~/assets/img/hd_logo.svg?v=1002" alt="" width="200">
+        </div>
+
+        <div class="profile-box mt-2 profile-point" style="margin-bottom: 80px;">
+            <div class="text-center ">
+                <h2 class="text-secondary mb-0 font-bold">
+                    <span>รายละเอียดใบเสร็จ</span>
+                </h2>
+            </div>
+            <div class="bg-white p-2 rounded mx-1 my-1">
+                <div class="p-2 form-item">
+                    <h4 style=" margin-bottom: 0px;">
+                        ช่องทางที่ท่านซื้อสินค้า: <span class="font-bold" data-bind="text: myObject.channelName"></span>
+                    </h4>
+                    <h4 class="mb-0">
+                        เหตุผล: <span class="font-bold text-danger" data-bind="text: myObject.rejectRemark"></span>
+                    </h4>
+                    <div align="center" data-bind="foreach: myObject.lstRecImg">
+                        <img class="mb-1 img-fluid" data-bind="attr: {src: imageURL}" />
+                    </div>                 
+                    <div class="text-center mt-4 mb-3">
+                        <button class="btn btn-outline-primary btn-animate w-40 mr-1" type="button" data-bind="click: myObject.gotoHistory">ย้อนกลับ</button>
+                        <button class="btn btn-primary btn-animate w-40 ml-1" type="button" data-bind="click: myObject.gotoEditRec">แก้ไขใบเสร็จ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+        }
+        $(document).ready(function () {
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                myObject.gotoEditRec = function () {
+                    window.location.href = _app.baseURL + 'Home/UploadRecEdit?reqGuid=' + myObject.reqGuid();
+                }
+                myObject.gotoHistory = function () {
+                    window.location.href = _app.baseURL + 'Home/History';
+                }
+             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/UploadRecView', '', 'UploadRecView');
+        });
+        $('.numeric').numeric();
+        $('#profile').css({
+            "text-decoration": "underline"
+        });
+    });
+    </script>
+}

@@ -1,0 +1,224 @@
+﻿@model tnki_line_sale_frontend.Models.CustProfileModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="main-subnav">
+    <div class="wrapper">
+        <div class="d-flex align-items-center header-subnav">
+            <a href="Profile"><img src="~/assets/img/backWh.svg" alt="" style="height: 18px;"></a><span class="font-nivea">ที่อยู่จัดส่งของรางวัล</span>
+        </div>
+    </div>
+</header>
+<div class="wrapper" data-bind='validationOptions: { insertMessages: false }'>
+    <div class="main-body-inner-page bg-white" style="padding: 20px;">
+        <div class="mt-4">
+
+
+            <div class="form-item icon-wrapper">
+                <input class="form-control icon-name icon" type="text" pattern="[A-Za-zก-ฮ]{1,}" placeholder="ชื่อ" data-bind="value: myObject.custData.custFirstName">
+                <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.custData.custFirstName"></span>
+            </div>
+            <div class="form-item icon-wrapper mt-2">
+                <input class="form-control icon-name icon" type="text" pattern="[A-Za-zก-ฮ]{1,}" placeholder="นามสกุล" data-bind="value: myObject.custData.custLastName">
+                <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.custData.custLastName"></span>
+            </div>
+            <div class="form-item icon-wrapper mt-2">
+                <input class="form-control icon-phone icon numeric" pattern="[0-9]*" inputmode="numeric" maxlength="10" type="number" placeholder="เบอร์โทรศัพท์" data-bind="value: myObject.custData.custTel">
+                <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.custData.custTel"></span>
+            </div>
+
+
+            <div class="form-item mt-3">
+                <div class="d-flex align-items-center">
+                    <label class="mb-0">กรอกที่อยู่สำหรับจัดส่งรางวัลให้ถูกต้อง​​</label>
+                </div>
+                <input class="form-control mt-3" type="text" placeholder="กรอกที่อยู่" data-bind="value: myObject.custData.custAddr01">
+                <div class="select-wrapper  mt-3" align="right">
+
+                    <select class="form-control select" id="ddlProvince" data-bind="
+                                                                'options':  myObject.lstProvince,
+                                                                'optionsText': function(item) {return item.provNameTh; },
+                                                                 'optionsCaption': 'จังหวัด',
+                                                                'optionsValue': function(item) {
+                                                                    return item.provId; },
+                                                                'value': myObject.custData.custProvId"></select>
+                </div>
+                <div class="select-wrapper  mt-3" align="right">
+                    <select class="form-control select" id="ddlDist" data-bind="
+                                                                'options':  myObject.lstDistrict,
+                                                                'optionsText': function(item) {return item.name_th; },
+                                                                 'optionsCaption': 'อำเภอ / เขต',
+                                                                'optionsValue': function(item) {
+                                                                    return item.distId; },
+                                                                'value': myObject.custData.custDistId"></select>
+                </div>
+                <div class="select-wrapper mt-3">
+                    <select class="form-control select" id="ddlSubDist" data-bind="
+                                                                'options':  myObject.lstSubDistrict,
+                                                                'optionsText': function(item) {return item.subDistNameTh; },
+                                                                 'optionsCaption': 'ตำบล / แขวง',
+                                                                'optionsValue': function(item) {
+                                                                    return item.subDistId; },
+                                                                'value': myObject.custData.custSubDistId"></select>
+                </div>
+                <div class="mt-3">
+                    <input class="form-control " type="text" placeholder="รหัสไปรษณีย์" data-bind="value: myObject.custData.postCode" readonly>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 mb-3">
+                <button class="btn btn-outline-primary btn-animate w-40 mr-1" type="button" data-bind="click: myObject.backToMyAccount">ย้อนกลับ</button>
+                <button class="btn btn-primary btn-animate w-40 ml-1" type="button" data-bind="click: myObject.showConfirmSubmit">บันทึกข้อมูล</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="confirm-popup">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2>ยืนยันแก้ไขข้อมูล</h2>
+                <div class="text">
+                    <h3 class="text-primary">ต้องการบันทึกข้อมูล</h3>
+                    <div class="text-center my-1 mx-4">
+                        <div class="text-center m-4"><a class="btn btn-primary btn-animate d-block" data-bind="click: myObject.confirmUpdate"><span>ยืนยัน</span></a></div>
+                        <div class="close-icon mt-3"><button type="button" class="" data-dismiss="modal" aria-label="Close"><span>ไว้คราวหลัง</span></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+            $(function () {
+                var mapping = {
+                }
+               function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                myObject.backToMyAccount = function () {
+                    window.location.href = _app.baseURL + 'Home/Profile';
+                }
+                   myObject.confirmUpdate = function () {
+                    blockUI();
+                    var req = {};
+                    req = myObject.custData;
+                    updatePersonalData(req, result => {
+                        window.location.href = _app.baseURL + 'Home/Profile';
+                    });
+                }
+
+                myObject.showConfirmSubmit = function () {
+                    if (myObject.custData.custFirstName.isValid() &&
+                        myObject.custData.custLastName.isValid() &&
+                        myObject.custData.custTel.isValid() ) {
+                        $('#confirm-popup').modal('show');
+                    } else {
+                        $.unblockUI();
+                        var msg = "โปรดกรอกข้อมูลให้ครบถ้วน";
+
+                        toastr["error"](msg);
+                    }
+                }
+                myObject.memberCancel = function () {
+                    blockUI();
+                    cancelMember(result => {
+                        ko.mapping.fromJS(result.data, mapping, self.myObject);
+                        $.unblockUI();
+                        toastr.info("ระบบจะลบข้อมูลทั้งหมดของคุณ ออกจากการร่วมกิจกรรมภายใน 7 วัน");
+                        $('#cancelMember').hide();
+                    });
+                }
+
+                self.myObject.custData.custProvId.subscribe(function (newValue) {
+                    if (newValue !== undefined && newValue > 0) {
+                        getDistByProvId(newValue, result => {
+                            ko.mapping.fromJS(result.data, mapping, self.myObject.lstDistrict);
+                            if (self.myObject.distId() > 0) {
+                                self.myObject.custData.custDistId(self.myObject.distId());
+                                self.myObject.distId(0);
+                            }
+                            $('#ddlDist').trigger('change');
+                        });
+                    }
+                });
+                self.myObject.custData.custDistId.subscribe(function (newValue) {
+                    if (newValue !== undefined && newValue > 0) {
+                        getSubDistByDistId(newValue, result => {
+                            ko.mapping.fromJS(result.data, mapping, self.myObject.lstSubDistrict);
+                            if (self.myObject.subDistId() > 0) {
+                                self.myObject.custData.custSubDistId(self.myObject.subDistId());
+                                self.myObject.subDistId(0);
+                            }
+                            $('#ddlSubDist').trigger('change');
+                        });
+                    }
+                });
+                self.myObject.custData.custSubDistId.subscribe(function (newValue) {
+                    if (newValue !== undefined && newValue > 0) {
+                        for (var i = 0; self.myObject.lstSubDistrict() != undefined && i < self.myObject.lstSubDistrict().length; i++) {
+                            if (newValue != null && newValue != "") {
+                                if (newValue == self.myObject.lstSubDistrict()[i].subDistId()) {
+                                    self.myObject.custData.postCode(self.myObject.lstSubDistrict()[i].subDistZipCode());
+                                    break;
+                                }
+                            }
+                            else {
+                                self.myObject.custData.postCode("");
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                myObject.custData.custTel.extend({
+                    required: {
+                        message: "กรุณากรอกข้อมูล"
+                    },
+                    pattern: {
+                        params: /\d[0-1,3-9]\d\d\d\d\d\d\d\d/,
+                        message: "เบอร์โทรศัพท์มือถือเท่านั้น"
+                    },
+                    minLength: {
+                        params: 10,
+                        message: "ข้อมูลเบอร์โทรศัพท์ต้องครบ 10 หลัก"
+                    },
+                    maxLength: {
+                        params: 10,
+                        message: "ข้อมูลเบอร์โทรศัพท์ต้องครบ 10 หลัก"
+                    },
+                    number: {
+                        message: "กรุณากรอกข้อมูลตัวเลขเท่านั้น"
+                    }
+                });
+                myObject.custData.custFirstName.extend({
+                    required: {
+                        message: "กรุณากรอกข้อมูล"
+                    }
+                });
+                myObject.custData.custLastName.extend({
+                    required: {
+                        message: "กรุณากรอกข้อมูล"
+                    }
+                });
+
+                myObject.custData.custTel.valueHasMutated();
+                myObject.custData.custFirstName.valueHasMutated();
+                myObject.custData.custLastName.valueHasMutated();
+             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            model.lineImage = '';
+            model.distId = 0;
+            model.subDistId = 0;
+
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/EditContractProfile', '', 'EDITCONTRACT');
+            $('.numeric').numeric();
+        });
+    </script>
+}

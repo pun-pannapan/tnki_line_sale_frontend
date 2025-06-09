@@ -1,0 +1,89 @@
+﻿@model tnki_line_sale_frontend.Models.CustProfileModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="main-subnav">
+    <div class="wrapper">
+        <div class="d-flex align-items-center header-subnav">
+            <a href="Profile"><img src="~/assets/img/backWh.svg" alt="" style="height: 18px;"></a><span class="font-nivea">ประวัติการส่งใบเสร็จ</span>
+        </div>
+    </div>
+</header>
+<div class="wrapper body-shadow main-body">
+ 
+    <div class="main-body-inner-page" style="padding: 20px;">
+        <div class="text-center ">
+            <div class="profile-hist-img">
+                <img data-bind="attr: {src: myObject.custData.custLineImg}" alt="">
+            </div>
+            <h3 class="profile-name mt-1 mb-1" data-bind="text: myObject.custData.custLineDisplayName"></h3>
+        </div>
+        <div data-bind="foreach: myObject.lstHist">
+            <div class="profile-box mt-2" style="font-size: 22px;">
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/calendar.png" alt=""><span>วันที่อัปโหลด:&nbsp;</span></div>
+                    <div class="value" data-bind="text: requestDate_str"></div>
+                </div>
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/store.png" alt=""><span>ร้านค้า:&nbsp;</span></div>
+                    <div class="value" data-bind="text: storeName"></div>
+                </div>
+                <div class="profile-detail-item ">
+                    <div class="label"> <img src="~/assets/img/status.png" alt=""><span>สถานะ:&nbsp;</span></div>
+                    <div class="value" data-bind="text: statusText, class: status() == 'REJT' ? 'text-danger' : status() == 'APPV' ? 'text-success' : ''"></div>
+                </div>
+                <div data-bind="if: status() == 'REJT'">
+                    <div>
+                        <div class="label" style=" color: #9F9F9F;font-size: 20px; font-family: 'Kittithada Bold', sans-serif; display: flex; align-items: center;">
+                            <img src="~/assets/img/status.png" style=" width: 15px; height: 15px; object-fit: contain; margin-right: 10px;" alt="">
+                            <span>หมายเหตุ:&nbsp;</span>
+                        </div>
+                        <div class="value" style="color: #b80303; font-size: 20px; font-family:'Kittithada Bold', sans-serif;" data-bind="text: remark"></div>
+                        <div align="center">
+                            <a class="aregister" data-bind="click:  myObject.gotoEditRec">กดเพื่อแก้ไขใบเสร็จ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+        }
+        $(document).ready(function () {
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                myObject.gotoEditRec = function (item) {
+                    window.location.href = _app.baseURL + 'Home/UploadRecView?reqGuid=' + item.reqGuid();                    
+                }
+                myObject.updatePersonalData = function () {
+                    if (myObject.custData.custFirstName.isValid() &&
+                        myObject.custData.custLastName.isValid() &&
+                        myObject.custData.custTel.isValid()) {
+                        blockUI();
+                        updatePersonalData(myObject.custData, resultReg => {
+                            window.location.href = _app.baseURL + 'Home/Profile';
+                        });
+                    } else {
+                        var msg = "โปรดกรอกข้อมูลให้ครบถ้วน";
+                        toastr["error"](msg);
+                    }
+                }
+             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/History', '', 'History');
+            $('#profile').css({
+                "text-decoration": "underline"
+            });
+        });
+    });
+    </script>
+}

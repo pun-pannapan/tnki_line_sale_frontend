@@ -1,0 +1,186 @@
+﻿@model tnki_line_sale_frontend.Models.CustProfileModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="main-subnav">
+    <div class="wrapper">
+        <div class="d-flex align-items-center header-subnav">
+            <a href="Profile"><img src="~/assets/img/backWh.svg" alt="" style="height: 18px;"></a><span class="font-nivea">แก้ไขข้อมูลส่วนตัว</span>
+        </div>
+    </div>
+</header>
+<div class="wrapper body-shadow main-body">
+    <div class="p-2">
+        <div class="text-center">
+            <img class="img-fluid" src="~/assets/img/hd_logo.svg?v=1002" alt="" width="200">            
+        </div>
+        <div class="mt-4" data-bind='validationOptions: { insertMessages: false }'>
+            <div class="profile-box mt-2 profile-point">
+                <div class="form-item">                 
+                    <div class="icon-wrapper">
+                        <input class="form-control icon-name icon" type="text" placeholder="ชื่อ" data-bind="value: myObject.custData.custFirstName">
+                        <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.custData.custFirstName"></span>
+                    </div>
+                    <div class="icon-wrapper mt-2">
+                        <input class="form-control icon-name icon" type="text" placeholder="นามสกุล" data-bind="value: myObject.custData.custLastName">
+                        <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.custData.custLastName"></span>
+                    </div>
+                    <div class="icon-wrapper mt-2">
+                        <input class="form-control icon-phone icon numeric" pattern="[0-9]*" inputmode="numeric" maxlength="10" type="number" placeholder="เบอร์โทรศัพท์" data-bind="value: myObject.custData.custTel">
+                        <span class="validationMessage text-danger small" data-bind="validationMessage:  myObject.custData.custTel"></span>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div style="padding-left: 1rem;" class="custom-control custom-checkbox ">
+                        <input type="checkbox" class="custom-control-input" id="isCheckTerm1" data-bind="checked: myObject.custData.custCheckPrivacy">
+                        <label class="custom-control-label lableregister" for="isCheckTerm1">
+                            ยอมรับ <a class="aregister" data-bind="click:  myObject.showTerm">ข้อตกลงและเงื่อนไขการให้บริการ</a> และ<a class="aregister" href="https://www.unilevernotices.com/privacy-notices/thailand-thai.html" target="_blank">นโยบายส่วนบุคคล</a> ของบริษัท ยูนิลีเวอร์ ไทย เทรดดิ้ง จำกัด
+                        </label>
+                    </div>
+                    <div style="padding-left: 1rem;" class="custom-control custom-checkbox ">
+                        <input type="checkbox" class="custom-control-input" id="isCheckTerm2" data-bind="checked: myObject.custData.custCheckTerm">
+                        <label class="custom-control-label lableregister" for="isCheckTerm2">
+                            ยินยอมรับข้อมูลข่าวสาร การนำเสนอเกี่ยวกับผลิตภัณฑ์ การให้บริการหรือสิทธิประโยชน์ต่างๆ ของผลิตภัณฑ์ Comfort และบริษัท ยูนิลีเวอร์ ไทย เทรดดิ้ง จำกัด ที่น่าสนใจได้
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-primary btn-animate w-100" data-bind="enable: myObject.isAccept, click: myObject.updatePersonalData"> <span>ยืนยัน</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="popupTerm" align="center">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin: 0px !important;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2>เงื่อนไขการร่วมกิจกรรมคอมฟอร์ทลุ้นโชค คำขอใบอนุญาตเลขที่ 528/2566</h2>
+                @*<h1>Luminous 630</h1>*@
+                <div class="text" align="left">
+                    <ol>
+                        <li>
+                            ผู้ที่สามารถเข้าร่วมกิจกรรมต้องเป็นผู้ที่ซื้อสินค้าคอมฟอร์ท บิวตี้ เพอร์ฟูม กลิ่นซากุระ และโรสวอเตอร์ หรือ กลิ่นเดซี่ และลิลลี่ ขนาดใดก็ได้ ผ่านช่องทางหน้าร้านเซเว่นอีเลฟเว่นสาขาใดก็ได้ หรือผ่านช่องทาง 7Delivery หรือ ช่องทาง All Online ใน แอพพลิเคชั่น 7-Eleven TH (7App) โดยการร่วมกิจกรรมในแต่ละช่องทางมีเงื่อนไขดังต่อไปนี้
+                            <ul>
+                                <li>ช่องทางหน้าร้านเซเว่นอีเลฟเว่น ซื้อสินค้าที่กำหนดจำนวน 1 ชิ้น รับ 1 สิทธิ์ในการลุ้นโชค และไม่มีการจำกัดสิทธิ์ต่อใบเสร็จ </li>
+                                <li>ช่องทาง 7Delivery กำหนดสินค้าที่ร่วมรายการทุก ๆ 2 ชิ้น รับ 3 สิทธิ์ในการลุ้นโชค โดยสินค้าทั้งต้องอยู่ในใบเสร็จเดียวกัน ไม่สามารถรวมใบเสร็จได้ และไม่มีการจำกัดสิทธิ์ต่อใบเสร็จ</li>
+                                <li>ช่องทาง All Online กำหนดสินค้าที่ร่วมรายการทุกๆ 2 ชิ้น รับ 4 สิทธิ์ในการลุ้นโชค โดยสินค้าต้องอยู่ในใบเสร็จเดียวกัน ไม่สามารถรวมใบเสร็จได้ และไม่มีการจำกัดสิทธิ์ต่อใบเสร็จ</li>
+                            </ul>
+                            โดยผู้เข้าร่วมกิจกรรม ต้องเพิ่มเพื่อนกับไลน์ แม่บ้านมือโปร (LINE : @@maebanmuepro) และเป็นผู้ลงทะเบียนกิจกรรมคอมฟอร์ทลุ้นโชค ซึ่งผู้โชคดี 1 ท่านสามารถได้รับรางวัลมูลค่าสูงสุดเพียง 1 รางวัลตลอดรายการเท่านั้น
+                        </li>
+                        <li>ระยะเวลาเริ่มรายการตั้งแต่วันที่ 24 มีนาคม 2566 ถึงวันที่ 23 พฤษภาคม 2566</li>
+                        <li>
+                            การจับรางวัล และประกาศผลรางวัล :
+                            <ul>
+                                <li>จับรางวัลทั้งหมด 1 ครั้ง ที่บริษัท เอาท์ไลเออร์ จำกัด เลขที่ 944 อาคารมิตรทาวน์ ออฟฟิศ ทาวเวอร์ ห้องเลขที่ S24017 ชั้นที่ 24 ถนน พระราม4 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330  วันที่ 31 พฤษภาคม 2566 เวลา 11.00 น. และประกาศผลรายชื่อผู้โชคดี ผ่านทาง LINE: @@maebanmuepro ในวันที่ 2 มิถุนายน 2566 ภายในเวลา 18.00 น.  </li>
+                                <li>ระยะเวลาในการส่งสิทธิ์เข้าร่วมกิจกรรมได้ตั้งแต่วันที่ 24 มีนาคม พ.ศ. 2565 และจนถึงเวลา 23:59 นาทีวันที่ 23 พฤษภาคม 2566 หากมีผู้ร่วมกิจกรรมส่งสิทธิ์หลังจากนี้ จะถือว่าไม่ได้รับสิทธิ์เข้าร่วมกิจกรรม </li>
+                                <li>
+                                    โดยแบ่งรางวัลเป็น 2 รางวัล ดังนี้
+                                    <ul>
+                                        <li>รางวัลที่ 1 ทริปเที่ยวญี่ปุ่น  2 ที่นั่ง มูลค่า 120,000 บาท จำนวน 1 รางวัล </li>
+                                        <li>รางวัลที่ 2 สร้อยคอทองคำ 1 สลึง มูลค่า 7,537.50 บาท (ราคา ณ วันที่ 13 กุมภาพันธ์ 2566) จำนวน 10 รางวัล  </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>กติกาการจับรางวัล บริษัทฯ จะดึงข้อมูลของผู้ร่วมกิจกรรมตั้งแต่วันที่ 24 มีนาคม 2566 ถึงวันที่ 23 พฤษภาคม 2566 โดยบริษัทฯ จะจัดพิมพ์ ลงบนกระดาษ ตัดเป็นชิ้นส่วนนำมารวมในกล่องจับสลากที่สามารถมองเห็นได้ชัดเจนโดยใช้วิธีคลุกเคล้าชิ้นส่วนทั้งหมดให้ทั่วกันเชิญแขกผู้มีเกียรติผู้ทรงคุณวุฒิที่น่าเชื่อถือจับชิ้นส่วนในกล่อง จับสลากต่อหน้าคณะกรรมการและสักขีพยานเพื่อให้ได้ผู้โชคดีสำหรับการจับรางวัลในแต่ละครั้ง </li>
+                        <li>ผู้เข้าร่วมกิจกรรม สามารถส่งใบเสร็จในการรับสิทธิ์ลุ้นโชค กี่ครั้งก็ได้ตลอดรายการภายในระยะเวลาที่กำหนด </li>
+                        <li>ผู้เข้าร่วมกิจกรรมไม่สามารถขอยกเลิกสิทธิ์การลุ้นรางวัลหรือขอคืนสิทธิ์เพื่อลุ้นรางวัลในทุกกรณีตลอดระยะเวลากิจกรรม </li>
+                        <li>บริษัทฯจะติดต่อผู้โชคดีภายใน 7 วัน ทำการหลังจากวันประกาศรายชื่อผู้โชคดีแต่ละครั้ง โดยติดต่อไปยัง หมายเลขโทรศัพท์ที่ผู้โชคดีลงทะเบียนไว้ หรือให้ผู้โชคดีติดต่อกลับ เพื่อที่ผู้โชคดีจะแจ้งข้อมูลเพื่อยืนยันสิทธิ์ ในการรับของรางวัล และนัดหมายการรับรางวัล บริษัทฯได้มอบหมายให้บริษัท เอาท์ไลเออร์ จำกัด เป็นตัวแทนในการติดต่อผู้โชคดี หากบริษัทฯติดต่อผู้โชคดีไม่ได้ภายใน 7 วันทำการดังกล่าวข้างต้น หรือ ผู้โชคดีไม่มารับรางวัล และ/หรือ ไม่ชำระค่าภาษี หรือค่าใช้จ่ายอื่นใดที่เกี่ยวข้อง ภายใน 30 วันนับจากวันที่ประกาศผลรายชื่อผู้โชคดีแต่ละครั้ง จะถือว่าสละสิทธิ์จากการรับรางวัลดังกล่าว  </li>
+                        <li>ผู้มีสิทธิได้รับรางวัลคือ ผู้ที่มีสัญชาติไทยและมีภูมิลำเนาอยู่ในประเทศไทยจะต้องแสดงเอกสารหลักฐาน อันได้แก่ พร้อมแสดงข้อมูลในสำเนาบัตรประจำตัวประชาชนหรือบัตรข้าราชการ และทะเบียนบ้าน และหน้าบัญชีทางการไลน์ ที่ร่วมรายการมาเป็นหลักฐาน ในการขอรับรางวัล ด้วยตนเองหรือ หนังสือมอบอำนาจในกรณีมอบอำนาจให้ผู้อื่นมารับแทน และเอกสารต่างๆ ตามที่บริษัทฯ กำหนด สำหรับ การรับรางวัล  </li>
+                        <li>ผู้โชคดีจะต้องติดต่อขอรับรางวัลที่บริษัท เอาท์ไลเออร์ จำกัด ในวันและเวลาทำการของบริษัท (วันจันทร์ - วันศุกร์ เวลา 10.00 – 18.00 น.) ภายในระยะ 30 วันทำการนับจาก ตั้งแต่วันประกาศ รายชื่อผู้โชคดี ในแต่ละครั้ง หากผู้โชคดีไม่ได้ติดต่อขอรับของรางวัลหรือเอกสารไม่ครบถ้วนภายในกำหนดเวลา ให้ถือว่าผู้โชคดี สละสิทธิ์ ในการรับรางวัล และบริษัทฯ จะมอบของรางวัลให้กับรายชื่อสำรองลำดับถัดไป ถ้ารายชื่อสำรอง ไม่มารับรางวัล ภายในระยะเวลา ที่กำหนดและ/หรือมีคุณสมบัติไม่ถูกต้องครบถ้วนหรือ ไม่ปฏิบัติตามเงื่อนไขที่กำหนด ให้ถือเป็น การสละสิทธิ์ ไม่รับรางวัลทันที ทางบริษัทฯขอสงวนสิทธิ์ ในการพิจารณาของรางวัล ตามที่บริษัทฯเห็นสมควร  </li>
+                        <li>ในกรณีที่ผู้โชคดีที่ได้รับรางวัล มีอายุต่ำกว่า 15 ปีบริบูรณ์ จะต้องนำเอกสารมาเพิ่มเติม คือ สูติบัตรฉบับจริง และสำเนารับรองความถูกต้องจำนวน 1 ฉบับมาแสดง โดยให้มาพร้อมกับบิดา มารดา หรือผู้ปกครอง (บิดา มารดา หรือผู้ปกครองจะต้องนำบัตรประชาชนและทะเบียนบ้านฉบับจริงและสำเนารับรองความถูกต้องจำนวน 1 ฉบับ มาแสดง) </li>
+                        <li>สำหรับผู้โชคดีที่ได้รับรางวัล แพ็กเกจทัวร์ญี่ปุ่น ทางบริษัทฯ ขอสงวนสิทธิ์ไม่รับผิดชอบค่าใช้จ่ายส่วนอื่นๆ อันจะเกิดขึ้น นอกเหนือจากรายการที่ระบุในโปรแกรมการท่องเที่ยว เช่น ค่าเดินทางไปสนามบิน, ค่าใช้จ่ายส่วนตัว, ค่าอาหารเครื่องดื่มนอกเหนือจากโปรแกรม </li>
+                        <li>สำหรับผู้โชคดีที่ได้รับรางวัล แพ็กเกจทัวร์ญี่ปุ่น หากหนังสือเดินทางหรือวีซ่าของผู้โชคดีไม่พร้อมสำหรับเดินทาง หรือดำเนินการเรื่องวีซ่าเข้าประเทศไม่ผ่าน ทางบริษัทฯ ขอสงวนสิทธิ์ไม่รับผิดชอบใดๆ ทั้งสิ้น </li>
+                        <li>ในการจับชิ้นส่วนรางวัลหากปรากฏชื่อผู้โชคดีแล้วผู้โชคดีจะต้องเป็นผู้รับรางวัลตาม ที่บริษัทฯกำหนดไว้ ผู้โชคดี ไม่สามารถโอนสิทธิ์ให้บุคคลอื่นได้และบริษัทฯขอสงวนสิทธิ์ในการไม่รับแลกคืน หรือเปลี่ยนของรางวัลเป็นเงินสด หรือของรางวัลอื่นใด </li>
+                        <li>บริษัทฯ มิได้มีส่วนเกี่ยวข้องในการจัดจำหน่ายของรางวัลที่ระบุในกิจกรรมนี้ และบริษัทฯ จะไม่รับประกัน และไม่รับผิดชอบ ต่อคุณภาพของรางวัล ดังกล่าว หากมีปัญหาเกี่ยวกับของรางวัล หรือบริการ ผู้โชคดีจะต้องติดต่อบริษัทที่ผลิต หรือจำหน่ายโดยตรง </li>
+                        <li>บริษัทฯไม่รับผิดชอบต่อการส่งข้อความที่ล่าช้า สูญหาย ไม่สมบูรณ์ การฉ้อโกง หรือการส่งข้อมูลที่ไม่ถูกต้อง ที่เกิดจาก ผู้ร่วมกิจกรรม และ/หรือระบบโทรศัพท์ ไม่ว่าจะเนื่องมาจากสาเหตุใดๆก็ตาม </li>
+                        <li>ผู้โชคดีที่ได้รับรางวัลมูลค่า 1,000 บาทขึ้นไป จะต้องชำระภาษี ณ ที่จ่าย 5% ของมูลค่ารางวัล โดยนำมูลค่าของรางวัลไปรวมภาษีเงินได้บุคคลธรรมดาประจำปี  </li>
+                        <li>ผู้ร่วมกิจกรรมต้องทำความเข้าใจและตกลงปฏิบัติตามกติกา เงื่อนไข และขั้นตอนการร่วมกิจกรรมอย่างครบถ้วน ถึงจะมีสิทธิได้รับรางวัล หากปรากฎว่าผู้ร่วมกิจกรรมหรือผู้ได้รับของรางวัล ไม่ปฏิบัติตามกติกาและ เงื่อนไขข้อใดข้อหนึ่งบริษัทฯขอสงวนสิทธิ์ในการตัดสิทธิหรือปฏิเสธในการมอบของรางวัลให้กับผู้ได้รับรางวัล </li>
+                        <li>หากตรวจพบว่ามีการทุจริตไม่ว่ารูปแบบใด แม้พบภายหลังการได้รับรางวัล บริษัทฯ สงวนสิทธิ์ในการเพิกถอน สิทธิการรับรางวัลของผู้ร่วมกิจกรรม หรือเรียกร้องมูลค่ารางวัล ที่ผู้ได้รับของรางวัลได้รับไปแล้วคืน </li>
+                        <li>พนักงานของบริษัท  ยูนิลีเวอร์ ไทย เทรดดิ้ง จำกัด และบุคคลหรือบริษัทที่เกี่ยวข้องกับการจัดกิจกรรมในครั้งนี้ รวมถึงครอบครัว ไม่มีสิทธิเข้าร่วมกิจกรรมและได้รับของรางวัล </li>
+                        <li>รายการชิงโชคนี้จัดขึ้นในประเทศไทยเท่านั้น ในกรณีมีข้อพิพาท คำตัดสินของบริษัทฯ ถือเป็นเด็ดขาดและสิ้นสุด </li>
+
+                    </ol>
+                    <div>เลขที่ใบอนุญาต 528/2566  ออกให้โดย อธิบดีกรมการปกครอง </div>
+                </div>
+                <div class="m-3 mb-5">
+                    <button class="btn btn-primary  btn-animate w-100" data-dismiss="modal"> <span>ปิด</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+        }
+        $(document).ready(function () {
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                myObject.showTerm = function () {
+                    $('#popupTerm').modal('show');
+                }
+                myObject.isAccept = ko.computed(function () {
+                    return self.myObject.custData.custCheckPrivacy();
+                }, this, { pure: true });
+                myObject.updatePersonalData = function () {
+                    if (myObject.custData.custFirstName.isValid() &&
+                        myObject.custData.custLastName.isValid() &&
+                        myObject.custData.custTel.isValid()) {
+                        blockUI();
+                        updatePersonalData(myObject.custData, resultReg => {
+                            window.location.href = _app.baseURL + 'Home/Profile';
+                        });
+                    } else {
+                        var msg = "โปรดกรอกข้อมูลให้ครบถ้วน";
+                        toastr["error"](msg);
+                    }
+                }
+                myObject.custData.custFirstName.extend({
+                    required: {
+                        message: "* จำเป็น"
+                    }
+                });
+                myObject.custData.custLastName.extend({
+                    required: {
+                        message: "* จำเป็น"
+                    }
+                });
+                myObject.custData.custTel.extend({
+                    required: {
+                        message: "* จำเป็น"
+                    }, minLength: {
+                        params: 10,
+                        message: "* ข้อมูลเบอร์โทรศัพท์ต้องครบ 10 หลัก"
+                    },
+                    maxLength: {
+                        params: 10,
+                        message: "* ข้อมูลเบอร์โทรศัพท์ต้องครบ 10 หลัก"
+                    },
+                    number: {
+                        message: "* เป็นตัวเลขเท่านั้น"
+                    }
+                });
+                myObject.custData.custFirstName.valueHasMutated();
+                myObject.custData.custLastName.valueHasMutated();
+                myObject.custData.custTel.valueHasMutated();
+             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/EditProfile', '', 'EditProfile');
+            $('.numeric').numeric();
+            $('#profile').css({
+                "text-decoration": "underline"
+            });
+        });
+    });
+    </script>
+}

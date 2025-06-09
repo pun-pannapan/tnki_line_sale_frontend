@@ -1,8 +1,41 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var jsonData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="wrapper body-shadow main-body">
+    <div class="body-wrapper">
+        <div class="main-container">
+            <div class="text-center">
+                <img class="img-fluid" src="~/assets/img/logo.png" alt="" width="100">
+            </div>
+            <div align="center">
+                <img class="img-fluid " style="border-radius: 15px; padding: 10px;" src="~/assets/img/mainKV01.png" alt="">
+                <img class="img-fluid " style="border-radius: 15px; padding: 10px;" src="~/assets/img/mainKV02.png" alt="">
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var mapping = {
+            }
+            $(document).ready(function () {
+                function ViewModel(data) {
+                    self.myObject = this;
+                    ko.mapping.fromJS(data, {}, self.myObject);
+                }
+                var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+                ko.applyBindings(new ViewModel(model));
+
+                reauthenLiff('home/Index', '', 'Index');
+
+                $('#mainPage').css({
+                    "text-decoration": "underline"
+                });
+            });
+        });
+    </script>
+}

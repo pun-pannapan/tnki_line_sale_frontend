@@ -1,0 +1,148 @@
+﻿@model tnki_line_sale_frontend.Models.RewardModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var jsonData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+}
+
+<div class="wrapper body-shadow main-body">
+    <div class="main-body-inner-page" style="padding: 20px; padding-bottom: 100px;">
+        <div class="text-center">
+            <img class="img-fluid" src="~/assets/img/logo.png" alt="" width="100">
+        </div>
+        <div class="profile-box-new mt-2 " align="center">
+            <div class="profile-img">
+                <img data-bind="attr: {src: myObject.custData.custLineImg}" alt="">
+                @*<img id="profileImg" alt="">*@
+            </div>
+            <div class="text profile-point" align="left">
+                <h3 class="mb-2" style="font-size: 1.2rem;">สวัสดีคุณ <span data-bind="text: myObject.custData.custLineDisplayName"></span></h3>
+                <div class="point">
+                    ตอนนี้คุณมียอดสะสม <br />
+                    <span style="color: #61bceb !important;" data-bind="number: myObject.totalPoint, precious: 0"></span> คะแนน
+                </div>
+            </div>
+        </div>
+        <div align="center" style="color: #fff; font-weight: bold;">* สามารถแลกได้สูงสุด 1 ชิ้นต่อรางวัล ตลอดรายการ</div>
+        <div data-bind="foreach: myObject.lstRewardLowTier">
+            <div class="redeem-item bg-white p-3 rounded home">
+                <div class="product">
+                    <img class="img-fluid" data-bind="attr:{src: rewardImage}">
+                    <span>คงเหลือ <span data-bind="number: rewardRemainStock, precision: 0"></span> / <span data-bind="number: rewardTotalStock, precision: 0"></span></span>
+                </div>
+                <div class="text">
+                    <h2 data-bind="text: rewardName"></h2>
+                    <p data-bind="text: rewardSubName"></p>
+                    <button class="btn btn-primary btn-animate w-75" data-bind="click: myObject.showConfirmRedeem, enable: isEnable"> แลกเลย</button>
+                </div>
+            </div>
+        </div>
+        <div data-bind="foreach: myObject.lstRewardHighTier">
+            <div class="redeem-item bg-white p-3 rounded home">
+              
+                <div class="product">
+
+                    <img class="img-fluid" data-bind="attr:{src: rewardImage}">
+                    <span>คงเหลือ <span data-bind="number: rewardRemainStock, precision: 0"></span> / <span data-bind="number: rewardTotalStock, precision: 0"></span></span>
+                </div>
+                <div class="text">
+                    <h2 data-bind="text: rewardName"></h2>
+                    <p data-bind="text: rewardSubName"></p>
+                    <button class="btn btn-primary btn-animate w-75" data-bind="click: myObject.showConfirmRedeemSpc, enable: isEnable"> แลกเลย</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="modal-confirmRedeemSpc" style="margin-top: 25% !important;">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <button type="button" class="close" data-bind="click: myObject.gotoHistory"><img class="img-fluid" src="~/assets/img/cancel.svg" alt=""></button>
+            <div class="modal-body">
+                <div class="text" align="center">
+                    <h4 style="font-weight: bold; font-size: 23px !important;">
+                        ยืนยันแลกของรางวัล <br />
+                        <span data-bind="text: myObject.rewardName"></span>
+                    </h4>
+                    <div class="text-center " style="display: flex">
+                        <button class="btn btn-primary  btn-animate w-75" data-dismiss="modal" style="margin: 5px;"> <span>กลับ</span></button>
+                        <button class="btn btn-primary  btn-animate w-75" data-bind="click: myObject.confirmRedeemSpc" style="margin: 5px;"> <span>ยืนยัน</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="modal-confirmRedeem" style="margin-top: 25% !important;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-bind="click: myObject.gotoHistory"><img class="img-fluid" src="~/assets/img/cancel.svg" alt=""></button>
+            <div class="modal-body">
+                <div class="text" align="center">
+                    <h4 style="font-weight: bold; font-size: 23px !important;">
+                        ยืนยันแลกของรางวัล <br />
+                        <span data-bind="text: myObject.rewardName"></span>
+                    </h4>
+                    <div class="text-center " style="display: flex">
+                        <button class="btn btn-primary  btn-animate w-75" data-dismiss="modal" style="margin: 5px;"> <span>กลับ</span></button>
+                        <button class="btn btn-primary  btn-animate w-75" data-bind="click: myObject.confirmRedeem" style="margin: 5px;"> <span>ยืนยัน</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+        }
+        $(document).ready(function () {
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                myObject.confirmRedeemSpc = function () {
+                    var request = {};
+                    request.redeemGuid = myObject.rewardGuid();
+                    request.redmHistQty = 1;
+                    blockUI();
+                    confirmRedeemSpc(request, result => {
+                        $.unblockUI();
+                        window.location.href = _app.baseURL + 'Home/EditContactProfile';
+                    });
+                }
+                myObject.showConfirmRedeemSpc = function (item) {
+                    myObject.rewardName(item.rewardName());
+                    myObject.rewardGuid(item.rewardGuid());
+                    $("#modal-confirmRedeemSpc").modal({ backdrop: 'static', keyboard: false }, 'show');
+                }
+                myObject.confirmRedeem = function () {
+                    var request = {};
+                    request.redeemGuid = myObject.rewardGuid();
+                    request.redmHistQty = 1;
+                    blockUI();
+
+                    confirmRedeem(request, result => {
+                        $.unblockUI();
+                        window.location.href = _app.baseURL + 'Home/EditContactProfile';
+                    });
+                }
+                myObject.showConfirmRedeem = function (item) {
+                    myObject.rewardName(item.rewardName());
+                    myObject.rewardGuid(item.rewardGuid());
+                    $("#modal-confirmRedeem").modal({ backdrop: 'static', keyboard: false }, 'show');
+                } 
+             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            ko.applyBindings(new ViewModel(model));
+            reauthenLiff('home/Reward', '', 'Reward');
+            $('#reward').css({
+                "text-decoration": "underline"
+            });
+        });
+
+
+    });
+    </script>
+}

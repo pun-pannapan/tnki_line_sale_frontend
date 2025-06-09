@@ -1,0 +1,158 @@
+﻿@model tnki_line_sale_frontend.Models.LeaderBoardModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper body-shadow main-body">
+    <div class="main-body-inner-page" style="padding: 20px;">
+        
+        <div class="mt-2" style="font-size: 22px;" >
+            <img class="img-fluid" src="~/assets/img/leaderBoard01.png?v=1001" alt="" width="100%" style=" border-radius: 10px;">
+            <div id="showRemainTimer" style="position: relative;bottom: 60px;right: 20px;float: right;">
+                <table style="text-align:center;color:#000000;font-size:0.8rem;    font-weight: 900;">
+                    <tbody>
+                        <tr>
+                            <td colspan="3">คุณมีเวลาเหลืออีก</td>
+                        </tr>
+                        <tr>
+                            <td>วัน</td><td>ชั่วโมง</td><td>นาที</td>
+                        </tr>
+                        <tr>
+                            <td id="showRemainDay">10</td>
+                            <td id="showRemainHour">12</td>
+                            <td id="showRemainMin">15</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ranking-bg" style="border-radius: 10px;">
+                <div data-bind="foreach: myObject.lstRanking_01" style="padding: 10px;">
+                    <div class="ranking-box-01 mt-2" style="font-size: 22px; ">
+                        <div class="profile-detail-item ">
+                            <div class="label" data-bind="text: ranking"> </div>
+                            <div class="ranking-img">
+                                <img data-bind="attr: {src: lineImg}" alt="">
+                            </div>
+                            <div class="label" style=" flex: 4;padding-left: 15px;"> <span data-bind="text: lineName"></span></div>
+                            <div class="label"> <span data-bind="number: totalPoint, precision: 0"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="foreach: myObject.lstRanking_02" style="padding: 10px;">
+                    <div class="ranking-box-02 mt-2" style="font-size: 22px; ">
+                        <div class="ranking-box-02-item">
+                            <div class="label" data-bind="text: ranking"> </div>
+                            <div class="ranking-img">
+                                <img data-bind="attr: {src: lineImg}" alt="">
+                            </div>
+                            <div class="label" style=" flex: 4;padding-left: 15px;"> <span data-bind="text: lineName"></span></div>
+                            <div class="label"> <span data-bind="number: totalPoint, precision: 0"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="foreach: myObject.lstRanking_03" style="padding: 10px;">
+                    <div class="ranking-box-03 mt-2" style="font-size: 22px; ">
+                        <div class="ranking-box-03-item">
+                            <div class="label" data-bind="text: ranking"> </div>
+                            <div class="ranking-img">
+                                <img data-bind="attr: {src: lineImg}" alt="">
+                            </div>
+                            <div class="label" style=" flex: 4;padding-left: 15px;"> <span data-bind="text: lineName"></span></div>
+                            <div class="label"> <span data-bind="number: totalPoint, precision: 0"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="foreach: myObject.lstRanking_04" style="padding: 10px;">
+                    <div class="ranking-box-04 mt-2" style="font-size: 22px; ">
+                        <div class="ranking-box-04-item">
+                            <div class="label" data-bind="text: ranking"> </div>
+                            <div class="ranking-img">
+                                <img data-bind="attr: {src: lineImg}" alt="">
+                            </div>
+                            <div class="label" style=" flex: 4;padding-left: 15px;"> <span data-bind="text: lineName"></span></div>
+                            <div class="label"> <span data-bind="number: totalPoint, precision: 0"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="if: myObject.ownRank.lineName() != null ">
+                    <div class="ranking-owner" style="font-size: 22px; ">
+                        <div class="ranking-box-own mt-2" style="font-size: 22px; ">
+                            <div class="ranking-box-own-item">
+                                <div class="label" data-bind="text: myObject.ownRank.ranking"> </div>
+                                <div class="ranking-img">
+                                    <img data-bind="attr: {src: myObject.ownRank.lineImg}" alt="">
+                                </div>
+                                <div class="label" style=" flex: 4;padding-left: 15px;"> <span data-bind="text: myObject.ownRank.lineName"></span></div>
+                                <div class="label"> <span data-bind="number: myObject.ownRank.totalPoint, precision: 0"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="modal-notOpenCamp" style="margin-top: 25% !important;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-bind="click: myObject.gotoIndex"><img class="img-fluid" src="~/assets/img/cancel.svg" alt=""></button>
+            <div class="modal-body">
+                <div class="text" align="center">
+                    <h4 style="font-weight: bold; font-size: 23px !important;">
+                        กิจกรรมสะสมยอดซื้อ Top Spender จะเริ่มในวันที่ <br /><span data-bind="text: myObject.topSpenderPeriod"></span>
+                    </h4>
+                    <div class="text-center ">
+                        <button class="btn btn-primary  btn-animate w-75" data-bind="click: myObject.gotoIndex"> <span>กลับหน้าหลัก</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-popup popup-profile-cancel" tabindex="-1" role="dialog" id="modal-closeCamp" style="margin-top: 25% !important;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-bind="click: myObject.gotoIndex"><img class="img-fluid" src="~/assets/img/cancel.svg" alt=""></button>
+            <div class="modal-body">
+                <div class="text" align="center">
+                    <h4 style="font-weight: bold; font-size: 23px !important;">
+                        หมดเวลาในการส่งใบเสร็จสำหรับ<br />กิจกรรม Top Spender <br />แอดมินกำลังตรวจสอบและรวบรวมข้อมูลภายใน 48 ชม.
+                    </h4>
+                    <div class="text-center " >
+                        <button class="btn btn-primary  btn-animate w-75"  data-bind="click: myObject.gotoIndex"> <span>ยืนยัน</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(function () {
+        var mapping = {
+        }
+        var profile = {};
+        $(document).ready(function () {
+            $('.numeric').numeric();
+            function ViewModel(data) {
+                self.myObject = this;
+                ko.mapping.fromJS(data, {}, self.myObject);
+                myObject.gotoIndex = function (item) {
+                    window.location.href = _app.baseURL + 'Home/Index';
+                }
+             }
+
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+
+            ko.applyBindings(new ViewModel(model));
+            blockUI();
+            reauthenLiff('home/Ranking', '', 'Ranking');
+        });
+        $('#prod').css({
+            "text-decoration": "underline"
+        });
+    });
+    </script>
+}

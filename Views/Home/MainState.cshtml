@@ -1,0 +1,32 @@
+﻿@model tnki_line_sale_frontend.Models.MainState
+@{
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<div class="wrapper body-shadow">
+    <div class="loading">
+        <div class="icon"><img class="img-fluid" src="~/assets/img/loading01.gif" alt=""></div>
+    </div>
+    <img class="img-fluid" src="~/assets/img/masterkv.png?v=1002" alt="">
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+
+    var mapping = {}
+
+    $(document).ready(function () {
+
+        function ViewModel(data) {
+            self.myObject = this;
+            ko.mapping.fromJS(data, {}, self.myObject);
+        }
+        var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+        ko.applyBindings(new ViewModel(model));
+        if (myObject.state() != undefined && myObject.state() != null && myObject.state() != '') {
+            localStorage.setItem('TNKILINESALE:OUTWRT:STATE', myObject.state());
+        }        
+        window.location.href = "line://app/" + _app.liffID + "?state=" + myObject.state() ;
+    });
+</script>
+}

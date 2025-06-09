@@ -24,8 +24,8 @@ async function getUserProfile_reAuthen(action, state, fromPage) {
     checkExistProfReq.lineImg = profile.pictureUrl;
     checkExistProfReq.lineDispName = profile.displayName;
 
-    if (localStorage.getItem('BREEZE:OUTWRT:STATE') != undefined && localStorage.getItem('BREEZE:OUTWRT:STATE') != null) {
-        state = localStorage.getItem('BREEZE:OUTWRT:STATE');
+    if (localStorage.getItem('TNKILINESALE:OUTWRT:STATE') != undefined && localStorage.getItem('TNKILINESALE:OUTWRT:STATE') != null) {
+        state = localStorage.getItem('TNKILINESALE:OUTWRT:STATE');
     }
 
     checkExistLineID(checkExistProfReq, result => {
@@ -34,7 +34,7 @@ async function getUserProfile_reAuthen(action, state, fromPage) {
             if (fromPage.toUpperCase() == 'MAINPAGE') {
                   // done
                 if (state != undefined && state != null && state != '') {
-                    localStorage.removeItem('BREEZE:OUTWRT:STATE');
+                    localStorage.removeItem('TNKILINESALE:OUTWRT:STATE');
                     insertVisitLog(state, resultState => {
                         window.location.href = _app.baseURL + 'Home/Index';
                     });
@@ -236,22 +236,22 @@ function checkExistLineID(req, callback) {
     });
 }
 function signOut() {
-    localStorage.removeItem('BREEZE:OUTWRT:TOKEN');
-    localStorage.removeItem('BREEZE:OUTWRT:TEL');
-    localStorage.removeItem('BREEZE:OUTWRT:NAME');
-    localStorage.removeItem('BREEZE:OUTWRT:PIC');
+    localStorage.removeItem('TNKILINESALE:OUTWRT:TOKEN');
+    localStorage.removeItem('TNKILINESALE:OUTWRT:TEL');
+    localStorage.removeItem('TNKILINESALE:OUTWRT:NAME');
+    localStorage.removeItem('TNKILINESALE:OUTWRT:PIC');
 }
 function setAuthenDataToStorage(resp) {
     //original
-    //localStorage.setItem('BREEZE:OUTWRT:TOKEN', resp.token);
-    //localStorage.setItem('BREEZE:OUTWRT:TEL', resp.custTelNo);
-    //localStorage.setItem('BREEZE:OUTWRT:NAME', resp.customerName);
-    //localStorage.setItem('BREEZE:OUTWRT:PIC', resp.linePic);
+    //localStorage.setItem('TNKILINESALE:OUTWRT:TOKEN', resp.token);
+    //localStorage.setItem('TNKILINESALE:OUTWRT:TEL', resp.custTelNo);
+    //localStorage.setItem('TNKILINESALE:OUTWRT:NAME', resp.customerName);
+    //localStorage.setItem('TNKILINESALE:OUTWRT:PIC', resp.linePic);
 
-    localStorage.setItem('BREEZE:OUTWRT:TOKEN', resp.token);
-    localStorage.setItem('BREEZE:OUTWRT:TEL', resp.custTel);
-    localStorage.setItem('BREEZE:OUTWRT:NAME', resp.customerName);
-    localStorage.setItem('BREEZE:OUTWRT:PIC', resp.linePic);
+    localStorage.setItem('TNKILINESALE:OUTWRT:TOKEN', resp.token);
+    localStorage.setItem('TNKILINESALE:OUTWRT:TEL', resp.custTel);
+    localStorage.setItem('TNKILINESALE:OUTWRT:NAME', resp.customerName);
+    localStorage.setItem('TNKILINESALE:OUTWRT:PIC', resp.linePic);
 }
 function insertVisitLog(state, callback) {
     $.ajax({
@@ -259,7 +259,7 @@ function insertVisitLog(state, callback) {
         url: _app.baseAPI + 'Home/insertVisitLog?state=' + state,
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -294,7 +294,7 @@ function updatePersonalData(registObj, callback) {
         url: _app.baseAPI + 'authen/updatePersonalData',
         type: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         data: ko.toJSON(registObj),
         dataType: "json",
@@ -366,7 +366,7 @@ function getActiveCampaign(callback) {
         url: _app.baseAPI + 'home/getActiveCampaign' ,
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -410,7 +410,7 @@ function insertEventStatePageLoad(reqData, callback) {
         url: _app.baseAPI + 'Home/insertEventStatePageLoad',
         data: ko.toJSON(reqData),
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -439,7 +439,7 @@ function getListStore(callback) {
         url: _app.baseAPI + 'home/getListStore',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -474,7 +474,7 @@ function confirmRedeemSpc(reqData, callback) {
         url: _app.baseAPI + 'home/confirmRedeemSpc',
         data: ko.toJSON(reqData),
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -509,7 +509,7 @@ function confirmRedeem(reqData, callback) {
         url: _app.baseAPI + 'home/confirmRedeem',
         data: ko.toJSON(reqData),
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -544,7 +544,7 @@ function cancelMember(callback) {
         url: _app.baseAPI + 'home/cancelMember',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -579,7 +579,7 @@ function joinTopSpender(callback) {
         url: _app.baseAPI + 'home/joinTopSpender',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -614,7 +614,7 @@ function getAllActiveReward(callback) {
         url: _app.baseAPI + 'Home/getAllActiveReward',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -649,7 +649,7 @@ function getRecDetailByGuid(reqGuid, callback) {
         url: _app.baseAPI + 'Home/getRecDetailByGuid?reqGuid=' + reqGuid,
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -684,7 +684,7 @@ function getCustomerData(callback) {
         url: _app.baseAPI + 'Authen/getCustomerData',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -719,7 +719,7 @@ function getHistRec(callback) {
         url: _app.baseAPI + 'Home/getHistRec',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -754,7 +754,7 @@ function getLeaderBoardData(callback) {
         url: _app.baseAPI + 'Home/getLeaderBoardData',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -787,7 +787,7 @@ function getHistRedeem(callback) {
         url: _app.baseAPI + 'Home/getHistRedeem',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -822,7 +822,7 @@ function getListProduct(callback) {
         url: _app.baseAPI + 'Home/getListProduct',
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -942,13 +942,13 @@ function getSubDistByDistId(distId, callback) {
     });
 }
 function checkValidToken(url) {
-    var token = localStorage.getItem('BREEZE:OUTWRT:TOKEN');
+    var token = localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN');
 
     if (token == null || token.trim() == '') {
         localStorage.clear();
         window.location = url;
     } else {
-        checkExistTelNo(localStorage.getItem('BREEZE:OUTWRT:TEL'), result => {
+        checkExistTelNo(localStorage.getItem('TNKILINESALE:OUTWRT:TEL'), result => {
       
             if (!result) {
                 localStorage.clear();
@@ -1015,7 +1015,7 @@ function getDistrictByProvince(provId, callback) {
         url: _app.baseAPI + 'api/getDistrictByProvince?provinceId=' + provId,
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -1050,7 +1050,7 @@ function getSubDistrictByDistrict(districtId, callback) {
         url: _app.baseAPI + 'api/getSubDistrictByDistrict?districtId=' + districtId,
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -1085,7 +1085,7 @@ function getCustGuidFromToken( callback) {
         url: _app.baseAPI + 'Authen/getCustGuidFromToken' ,
         data: {},
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('BREEZE:OUTWRT:TOKEN')
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
