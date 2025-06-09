@@ -7,7 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\kartik-fileinput\.github\CODE_OF_CONDUCT.md" />
+    <None Include="wwwroot\lib\kartik-fileinput\.github\config.yml" />
+    <None Include="wwwroot\lib\kartik-fileinput\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\lib\kartik-fileinput\.github\FUNDING.yml" />
+    <None Include="wwwroot\lib\kartik-fileinput\.github\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\lib\kartik-fileinput\.github\PULL_REQUEST_TEMPLATE.md" />
+    <None Include="wwwroot\lib\kartik-fileinput\.github\stale.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>

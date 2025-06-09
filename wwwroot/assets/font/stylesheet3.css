@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'NiveaLight';
+    src: url('NiveaLightVNU.woff2') format('woff2'),
+        url('NiveaLightVNU.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

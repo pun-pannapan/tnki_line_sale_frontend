@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Kittithada Bold';
+    src: url('KittithadaMedium65.woff2') format('woff2'),
+        url('KittithadaMedium65.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kittithada Bold';
+    src: url('KittithadaMedium65Italic.woff2') format('woff2'),
+        url('KittithadaMedium65Italic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kittithada Light';
+    src: url('KittithadaLight45.woff2') format('woff2'),
+        url('KittithadaLight45.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kittithada Light';
+    src: url('KittithadaLight45Italic.woff2') format('woff2'),
+        url('KittithadaLight45Italic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
