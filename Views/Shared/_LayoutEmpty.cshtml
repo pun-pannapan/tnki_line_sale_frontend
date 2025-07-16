@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
     <title>
         บรีส - กล้าเปลี่ยน เพื่อโลกที่ดีกว่า
     </title>
@@ -29,10 +28,8 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="~/assets/css/jquery.timepicker.min.css">
     <link id="mainStyles" rel="stylesheet" media="screen" href="~/assets/css/datepicker.css">
     <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
-    <link id="mainStyles" rel="stylesheet" media="screen" href="~/lib/fancy-timer/fancy-timer_20230417.css">
     <script src="~/assets/js/jquery.min.js"></script>
 
-    <link href="~/lib/kartik-fileinput/css/fileinput.css" rel="stylesheet" />
     <style>
         .se-pre-con {
             position: fixed;
@@ -43,88 +40,14 @@
             z-index: 9999;
             background: url(../images/preloader.gif) center no-repeat;
         }
-
-        .wrap2Line {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-            line-height: 1em;
-            height: 2em;
-        }
-
-        .wrap2LineSubTitle {
-            line-height: 1em;
-            height: 2em;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-        }
-
-        .wrap1Line {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-            line-height: 1em;
-        }
-
-        .wrap1LineSubTitle {
-            line-height: 1em;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-        }
     </style>
 </head>
 
 
 <body>
     @RenderBody()
-    <div class="footer">
-        <div class="wrapper">
-            <nav>
-                <a href="/Home/MainPage" id="mainPage">
-                    <img class="img-fluid" src="~/assets/img/home.png" alt=""><span>หน้าหลัก</span>
-                </a>
-                <a class="line" href="/Home/Reward" id="reward">
-                    <img class="img-fluid" src="~/assets/img/giftbox.png" alt=""><span>ของรางวัล</span>
-                </a>
-                <a class="redeem" href="/Home/UploadRec" id="upload">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
-                        <defs>
-                            <style>
-                                .menu-3-a, .menu-3-b {
-                                    fill: none;
-                                }
 
-                                .menu-3-b {
-                                    fill: #a18140;
-                                }
 
-                                .menu-3-c {
-                                    fill: #fff;
-                                }
-
-                                .menu-3-d {
-                                    stroke: none;
-                                }
-                            </style>
-                        </defs>
-                    </svg>
-                    <span style=" margin-top: 38px;">ส่งใบเสร็จ</span>
-                </a>
-                <a href="/Home/Ranking" id="prod">
-                    <img class="img-fluid" src="~/assets/img/ranking.png" alt=""><span>ยอดสะสม</span>
-                </a>
-                <a class="line" href="/Home/Profile" id="profile"><img class="img-fluid" src="~/assets/img/user.png" alt=""><span>โปรไฟล์</span></a>
-            </nav>
-        </div>
-    </div>
 
     <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     <script src="~/assets/js/bootstrap.bundle.min.js"></script>
@@ -135,7 +58,8 @@
     <script src="~/assets/js/bootstrap-datepicker.js"></script>
     <script src="~/assets/js/bootstrap-datepicker-thai.js"></script>
     <script src="~/assets/js/locales/bootstrap-datepicker.th.js"></script>
-    <script src="~/assets/js/datatable.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
     <script type='text/javascript' src='~/js/knockout-3.5.1.js'></script>
     <script type='text/javascript' src='~/js/knockout.mapping-latest.js'></script>
@@ -143,21 +67,19 @@
     <script type='text/javascript' src='~/js/select2.min.js'></script>
     <script type='text/javascript' src='~/js/jquery.numeric.min.js'></script>
     <script type='text/javascript' src="~/js/blockUI.js"></script>
-    @*<script src="~/assets/js/plugins/sweetalert.min.js"></script>*@
-    <script src="~/lib/toastr/toastr.min.js"></script>
     <script src="~/js/qrcode.min.js"></script>
     <script src="~/js/JsBarcode.all.min.js"></script>
-    <script src="~/lib/kartik-fileinput/js/fileinput_20230315-1.js"></script>
-    <script src="~/lib/fancy-timer/index.min.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+
     <script src="~/js/services.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
-</html>
+</html> 
 
 
 <script type="text/javascript">
-    var _app = {
+      var _app = {
         "evTypePage": "PAGE",
         "evTypeEvent": "EVENT",
         "baseURL": "@Url.Content("~/")",
@@ -165,11 +87,7 @@
         "liffID": '@ViewBag.liffID',
         "baseFront": '@ViewBag.baseFront',
         "baseAPI": '@ViewBag.baseAPI'
-    };
-
-    $("#custName").html(localStorage.getItem('BREEZE:OUTWRT:NAME'));
-    $("#profileImg").attr("src", localStorage.getItem('BREEZE:OUTWRT:PIC'));
-
+      };
     function blockUI() {
         $.blockUI({
             css: {
