@@ -58,7 +58,7 @@ namespace tnki_line_sale_frontend.Controllers
 
             return View();
         }
-        public IActionResult SampleRec()
+        public IActionResult LandingPage()
         {
             setDataIntoViewBag();
             return View();
