@@ -4,7 +4,8 @@
 }
 
 <div class="main-body">
-    <div class="p-2">
+    @* original content showing how to submit receipt *@
+   @*  <div class="p-2">
         <div class="profile-box mt-4 profile-point" style="margin-bottom: 80px; padding: 0px !important;">
             <h2 style="background: linear-gradient(90deg, #ffc000 20%, #f3e6bf 58%, #f5cf5d 63%, #ffc000 79%); border-radius: 10px 10px 0px 0px; color: #02539c; font-size: 32px; text-align: center; padding: 30px; font-family: 'Kittithada Bold'; ">คำแนะนำในการส่งใบเสร็จ</h2>           
             <div class="text" align="left" style="padding: 10px 15px;">
@@ -119,6 +120,34 @@
                 <button class="btn btn-primary btn-animate w-100" data-bind="click: myObject.gotoSendRec"> <span>เริ่มส่งใบเสร็จ​</span></button>
             </div>
         </div>
+    </div> *@
+
+    <div class="slider-container">
+        <div class="product-slider">
+            <!-- Slide 1 -->
+            <div>
+                <img src="~/assets/img/product/1.png" alt="Ranger Extreme" class="product-image">
+                <div class="product-title">Ranger Extreme</div>
+                <div class="product-desc">ควันน้อยประสิทธิภาพสูง</div>
+                <button class="btn btn-buy">เริ่มซื้อสินค้า</button>
+            </div>
+
+            <!-- Slide 2 -->
+            <div>
+                <img src="~/assets/img/product/4.png" alt="Ranger Max" class="product-image">
+                <div class="product-title">Ranger Max</div>
+                <div class="product-desc">กำจัดยุงในพื้นที่กว้าง</div>
+                <button class="btn btn-buy">เริ่มซื้อสินค้า</button>
+            </div>
+
+            <!-- Slide 3 -->
+            <div>
+                <img src="~/assets/img/product/7.png" alt="Ranger Lite" class="product-image">
+                <div class="product-title">Ranger Lite</div>
+                <div class="product-desc">กลิ่นหอม เหมาะกับห้องนอน</div>
+                <button class="btn btn-buy">เริ่มซื้อสินค้า</button>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -141,6 +170,15 @@
                     var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
                     ko.applyBindings(new ViewModel(model));
                     reauthenLiff('home/SampleRec', '', 'SampleRec');
+
+                    $('.product-slider').slick({
+                        dots: true,
+                        arrows: false,
+                        infinite: true,
+                        speed: 500,
+                        slidesToShow: 1,
+                        adaptiveHeight: true
+                    });
                 });
             });
         </script>

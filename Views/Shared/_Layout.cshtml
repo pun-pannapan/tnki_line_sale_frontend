@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <title>
-        บรีส - กล้าเปลี่ยน เพื่อโลกที่ดีกว่า
+        ธนัทกร - ผลิตภัณฑ์ ปลอดภัย รับรองโดย อย.
     </title>
     <!-- SEO Meta Tags-->
     <meta property="og:image" content="~/assets/img/logo.png">
-    <meta property="og:description" content="บรีส - กล้าเปลี่ยน เพื่อโลกที่ดีกว่า">
-    <meta property="og:title" content="บรีส - กล้าเปลี่ยน เพื่อโลกที่ดีกว่า">
+    <meta property="og:description" content="ธนัทกร - ผลิตภัณฑ์ ปลอดภัย รับรองโดย อย.">
+    <meta property="og:title" content="ธนัทกร - ผลิตภัณฑ์ ปลอดภัย รับรองโดย อย.">
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/img/logo.png">
 
 
@@ -30,6 +30,8 @@
     <link id="mainStyles" rel="stylesheet" media="screen" href="~/assets/css/datepicker.css">
     <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
     <link id="mainStyles" rel="stylesheet" media="screen" href="~/lib/fancy-timer/fancy-timer_20230417.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <script src="~/assets/js/jquery.min.js"></script>
 
     <link href="~/lib/kartik-fileinput/css/fileinput.css" rel="stylesheet" />
@@ -79,6 +81,52 @@
             -webkit-line-clamp: 1;
             overflow: hidden;
         }
+
+        .slider-container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 40px 10px;
+        }
+
+        .slick-slide {
+            text-align: center;
+            padding: 20px 10px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .product-image {
+            max-width: 160px;
+            margin: 10px auto;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: #777;
+            margin: 10px 0 20px;
+        }
+
+        .btn-buy {
+            background-color: #339af0;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .slick-dots li button:before {
+            color: #339af0;
+        }
+
+        .slick-dots {
+            bottom: -30px;
+        }
     </style>
 </head>
 
@@ -91,7 +139,8 @@
                 <a href="/Home/MainPage" id="mainPage">
                     <img class="img-fluid" src="~/assets/img/home.png" alt=""><span>หน้าหลัก</span>
                 </a>
-                <a class="line" href="/Home/Reward" id="reward">
+                @* original เก็บเมนู upload rec ไว้เพราะจะใช้ upload ใบเสร็จเหมือนกัน *@
+                @* <a class="line" href="/Home/Reward" id="reward">
                     <img class="img-fluid" src="~/assets/img/giftbox.png" alt=""><span>ของรางวัล</span>
                 </a>
                 <a class="redeem" href="/Home/UploadRec" id="upload">
@@ -120,8 +169,34 @@
                 </a>
                 <a href="/Home/Ranking" id="prod">
                     <img class="img-fluid" src="~/assets/img/ranking.png" alt=""><span>ยอดสะสม</span>
+                </a> 
+                 <a class="line" href="/Home/Profile" id="profile"><img class="img-fluid" src="~/assets/img/user.png" alt=""><span>โปรไฟล์</span></a>
+                *@
+                <a class="redeem" href="/Home/Reward" id="upload">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                        <defs>
+                            <style>
+                                .menu-3-a, .menu-3-b {
+                                    fill: none;
+                                }
+
+                                .menu-3-b {
+                                    fill: #a18140;
+                                }
+
+                                .menu-3-c {
+                                    fill: #fff;
+                                }
+
+                                .menu-3-d {
+                                    stroke: none;
+                                }
+                            </style>
+                        </defs>
+                    </svg>
+                    <span style=" margin-top: 38px;">ของรางวัล</span>
                 </a>
-                <a class="line" href="/Home/Profile" id="profile"><img class="img-fluid" src="~/assets/img/user.png" alt=""><span>โปรไฟล์</span></a>
+                <a class="" href="/Home/Profile" id="profile"><img class="img-fluid" src="~/assets/img/user.png" alt=""><span>โปรไฟล์</span></a>
             </nav>
         </div>
     </div>
