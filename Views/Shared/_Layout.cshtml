@@ -82,7 +82,8 @@
             overflow: hidden;
         }
 
-        .slider-container {
+        /* this is style for product slider */
+       /*  .slider-container {
             max-width: 420px;
             margin: 0 auto;
             padding: 40px 10px;
@@ -126,7 +127,8 @@
 
         .slick-dots {
             bottom: -30px;
-        }
+        } */
+        /* end slide item class */
     </style>
 </head>
 
@@ -194,7 +196,7 @@
                             </style>
                         </defs>
                     </svg>
-                    <span style=" margin-top: 38px;">ของรางวัล</span>
+                    <span style=" margin-top: 38px;">โปรโมชั่น</span>
                 </a>
                 <a class="" href="/Home/Profile" id="profile"><img class="img-fluid" src="~/assets/img/user.png" alt=""><span>โปรไฟล์</span></a>
             </nav>
@@ -242,8 +244,8 @@
         "baseAPI": '@ViewBag.baseAPI'
     };
 
-    $("#custName").html(localStorage.getItem('BREEZE:OUTWRT:NAME'));
-    $("#profileImg").attr("src", localStorage.getItem('BREEZE:OUTWRT:PIC'));
+    $("#custName").html(localStorage.getItem('TNKILINESALE:OUTWRT:NAME'));
+    $("#profileImg").attr("src", localStorage.getItem('TNKILINESALE:OUTWRT:PIC'));
 
     function blockUI() {
         $.blockUI({
