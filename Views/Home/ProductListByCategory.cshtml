@@ -50,6 +50,8 @@
 
 
 <div class="container-fluid px-3 background-white">
+@if (Model.prodCategoryId == "1")
+{
     <!-- Header -->
     <div class="d-flex align-items-center mb-3">
         @* <img src="/assets/img/product/11.png" class="mr-2" alt="ยาจุดกันยุงชนิดขด"> *@
@@ -58,13 +60,11 @@
             <h1 class="mb-0">ยาจุดกันยุงชนิดขด</h1>
         </div>
     </div>
-
     <!-- Filter -->
     <div class="d-flex justify-content-between border-top-section align-items-center mb-3 pt-2">
         <h4 class="mb-0">รายการสินค้า</h4>
         <medium class="text-muted">8 products</medium>
     </div>
-
     <!-- Product Grid -->
     <div class="row pb-5">
           
@@ -167,7 +167,175 @@
         </div>
 
     </div>
-    <!-- End Product Grid -->
+        <!-- End Product Grid -->
+}
+else if (Model.prodCategoryId == "2")
+{
+        <!-- Header -->
+        <div class="d-flex align-items-center mb-3">
+            @* <img src="/assets/img/product/11.png" class="mr-2" alt="ยาจุดกันยุงชนิดขด"> *@
+            <img src="/assets/img/logo.png" class="mr-2" alt="ยาจุดกันยุงไฟฟ้า">
+            <div>
+                <h1 class="mb-0">ยาจุดกันยุงไฟฟ้า</h1>
+            </div>
+        </div>
+        <!-- Filter -->
+        <div class="d-flex justify-content-between border-top-section align-items-center mb-3 pt-2">
+            <h4 class="mb-0">รายการสินค้า</h4>
+            <medium class="text-muted">4 products</medium>
+        </div>
+        <!-- Product Grid -->
+        <div class="row pb-5">
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/13.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเก้าท์ เครื่องไล่ยุงไฟฟ้า พร้อมน้ำยา + น้ำยา ชนิดเติม 40 มล. ( 3 กล่อง )</div>
+                        <div class="product-price">฿193</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/14.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเก้าท์ น้ำยาไล่ยุงไฟฟ้า ชนิดเติม 40 มล. ( 3 กล่อง )</div>
+                        <div class="product-price">฿123</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/5.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเก้าท์ เครื่องไล่ยุงไฟฟ้า พร้อมน้ำยา + น้ำยา ชนิดเติม 40 มล. ( ยกลัง 12 กล่อง )</div>
+                        <div class="product-price">฿770</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/6.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเก้าท์ น้ำยาไล่ยุงไฟฟ้า ชนิดเติม 40 มล. ( ยกลัง 12 กล่อง )</div>
+                        <div class="product-price">฿490</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Product Grid -->
+}
+else if (Model.prodCategoryId == "3")
+{
+        <!-- Header -->
+        <div class="d-flex align-items-center mb-3">
+            @* <img src="/assets/img/product/11.png" class="mr-2" alt="ยาจุดกันยุงชนิดขด"> *@
+            <img src="/assets/img/logo.png" class="mr-2" alt="สเปรย์ฉีดยุง">
+            <div>
+                <h1 class="mb-0">สเปรย์ฉีดยุง</h1>
+            </div>
+        </div>
+        <!-- Filter -->
+        <div class="d-flex justify-content-between border-top-section align-items-center mb-3 pt-2">
+            <h4 class="mb-0">รายการสินค้า</h4>
+            <medium class="text-muted">2 products</medium>
+        </div>
+        <!-- Product Grid -->
+        <div class="row pb-5">
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/12.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเกาท์ สเปรย์ -15C 600 มล. ( แพ็ค 3 กระป๋อง )</div>
+                        <div class="product-price">฿203</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/4.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเกาท์ สเปรย์ -15C 600 มล. ( ยกลัง 12 กระป๋อง )</div>
+                        <div class="product-price">฿805</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Product Grid -->
+}
+else if (Model.prodCategoryId == "4")
+{
+        <!-- Header -->
+        <div class="d-flex align-items-center mb-3">
+            @* <img src="/assets/img/product/11.png" class="mr-2" alt="ยาจุดกันยุงชนิดขด"> *@
+            <img src="/assets/img/logo.png" class="mr-2" alt="กาวดักแมลงวัน">
+            <div>
+                <h1 class="mb-0">กาวดักแมลงวัน</h1>
+            </div>
+        </div>
+        <!-- Filter -->
+        <div class="d-flex justify-content-between border-top-section align-items-center mb-3 pt-2">
+            <h4 class="mb-0">รายการสินค้า</h4>
+            <medium class="text-muted">2 products</medium>
+        </div>
+        <!-- Product Grid -->
+        <div class="row pb-5">
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/15.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเก้าท์ กาวดักแมลงวัน กลิ่นปลาทู (50 แผ่น)</div>
+                        <div class="product-price">฿99</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mb-3">
+                <div class="product-card">
+                    <div class="position-relative">
+                        <img src="~/assets/img/product/7.png" alt="Product" class="product-image" />
+                        @* <i class="fas fa-heart heart-icon"></i> *@
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">เรนเจอร์ สเก้าท์ กาวดักแมลงวัน กลิ่นปลาทู ( ยกลัง 10 แพ็ค รวม 500 แผ่น)</div>
+                        <div class="product-price">฿985</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Product Grid -->
+}
 </div>
 
 @section Scripts {
