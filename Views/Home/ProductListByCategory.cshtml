@@ -1,0 +1,193 @@
+﻿@model tnki_line_sale_frontend.Models.ProductCategoryModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var jsonData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+}
+
+@* <p>Category ID: @Model.prodCategoryId</p> *@
+
+@section Styles {
+    <style>
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .product-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        .product-price {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .badge-recommend {
+            background-color: #f5f5f5;
+            border-radius: 15px;
+            padding: 5px 15px;
+        }
+
+        .border-top-section {
+            border: none;
+            border-top: 5px solid #ccc; /* สีเทาอ่อน */
+            margin: 1rem 0;
+        }
+
+        .background-white {
+            background-color:#fff;
+        }
+    </style>
+}
+
+
+<div class="container-fluid px-3 background-white">
+    <!-- Header -->
+    <div class="d-flex align-items-center mb-3">
+        @* <img src="/assets/img/product/11.png" class="mr-2" alt="ยาจุดกันยุงชนิดขด"> *@
+        <img src="/assets/img/logo.png" class="mr-2" alt="ยาจุดกันยุงชนิดขด">
+        <div>
+            <h1 class="mb-0">ยาจุดกันยุงชนิดขด</h1>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="d-flex justify-content-between border-top-section align-items-center mb-3 pt-2">
+        <h4 class="mb-0">รายการสินค้า</h4>
+        <medium class="text-muted">8 products</medium>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row pb-5">
+          
+        <div class="col-6 mb-3">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/11.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ เอ็กซ์ตรีม ยากันยุงควันน้อย 8 ชม 8+2 ขด แซนดัลวูด ( ยกลัง 60 กล่อง )</div>
+                    <div class="product-price">฿1210</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mb-3">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/10.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ เอ็กซ์ตรีม ยากันยุงควันน้อย 8 ชม 8+2 ขด ลาเวนเดอร์ ( ยกลัง 60 กล่อง )</div>
+                    <div class="product-price">฿1210</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mb-3">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/9.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ สเก้าท์ ยากันยุงควันน้อย 12 ชม. 10 ฟรี 2 ขุด (ยกลัง 60 กล่อง )</div>
+                    <div class="product-price">฿1840</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mb-3">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/8.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ นกเหยี่ยว ยากันยุงสูตรใหม่ 8 ชม. 10 ขด แซนดัลวูด ( ยกลัง 60 กล่อง )</div>
+                    <div class="product-price">฿720</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-6 mb-3">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/19.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ เอ็กซ์ตรีม ยากันยุงควันน้อย 8 ชม 8+2 ขด แซนดัลวูด (5 กล่อง)</div>
+                    <div class="product-price">฿101</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mb-3">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/18.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ เอ็กซ์ตรีม ยากันยุงควันน้อย 8 ชม 8+2 ขด ลาเวนเดอร์ (5 กล่อง)</div>
+                    <div class="product-price">฿101</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mb-5">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/17.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ สเก้าท์ ยากันยุงควันน้อย 12 ชม. 10 ฟรี 2 ขด (5 กล่อง)</div>
+                    <div class="product-price">฿155</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 mb-5">
+            <div class="product-card">
+                <div class="position-relative">
+                    <img src="~/assets/img/product/16.png" alt="Product" class="product-image" />
+                </div>
+                <div class="product-info">
+                    <div class="product-title">เรนเจอร์ นกเหยี่ยว ยากันยุงสูตรใหม่ 8 ชม. 10 ขด แซนดัลวูด (5 กล่อง)</div>
+                    <div class="product-price">฿62</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Product Grid -->
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var mapping = {
+            }
+            $(document).ready(function () {
+                function ViewModel(data) {
+                    self.myObject = this;
+                    ko.mapping.fromJS(data, {}, self.myObject);
+                   
+                 }
+
+                var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+                ko.applyBindings(new ViewModel(model));
+                reauthenLiff('home/ProductListByCategory', '', 'ProductListByCategory');              
+            });
+
+
+        });
+    </script>
+}

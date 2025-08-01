@@ -46,6 +46,13 @@ namespace tnki_line_sale_frontend.Controllers
             return View(model);
         }
 
+        public IActionResult ProductListByCategory(string categoryId)
+        {
+            ProductCategoryModel model = new ProductCategoryModel();
+            model.prodCategoryId = (categoryId == null ? "1" : categoryId.Trim());
+            return View(model);
+        }
+
         public IActionResult Index()
         {
             setDataIntoViewBag();

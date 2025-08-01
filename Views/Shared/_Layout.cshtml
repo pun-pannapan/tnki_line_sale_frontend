@@ -81,55 +81,6 @@
             -webkit-line-clamp: 1;
             overflow: hidden;
         }
-
-        /* this is style for product slider */
-       /*  .slider-container {
-            max-width: 420px;
-            margin: 0 auto;
-            padding: 40px 10px;
-        }
-
-        .slick-slide {
-            text-align: center;
-            padding: 20px 10px;
-            background-color: #fff;
-            border-radius: 10px;
-        }
-
-        .product-image {
-            max-width: 160px;
-            margin: 10px auto;
-        }
-
-        .product-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .product-desc {
-            font-size: 14px;
-            color: #777;
-            margin: 10px 0 20px;
-        }
-
-        .btn-buy {
-            background-color: #339af0;
-            color: #fff;
-            border-radius: 20px;
-            padding: 10px 20px;
-            border: none;
-        }
-
-        .slick-dots li button:before {
-            color: #339af0;
-        }
-
-        .slick-dots {
-            bottom: -30px;
-        } */
-        /* end product slider style */
-
         /* home page style product and category */
         .category-grid {
             display: flex;
@@ -148,11 +99,12 @@
             transition: transform 0.2s;
             flex: 1;
             min-width: 0;
+            cursor: pointer;
         }
 
-        .category-item:hover {
-            transform: translateY(-2px);
-        }
+            .category-item:hover {
+                transform: translateY(-2px);
+            }
 
         .category-icon {
             width: 45px;
@@ -166,11 +118,11 @@
             overflow: hidden;
         }
 
-        .category-icon img {
-            width: 35px;
-            height: 35px;
-            object-fit: contain;
-        }
+            .category-icon img {
+                width: 35px;
+                height: 35px;
+                object-fit: contain;
+            }
 
         .product-card {
             background: white;
@@ -181,9 +133,9 @@
             transition: transform 0.2s;
         }
 
-        .product-card:hover {
-            transform: translateY(-2px);
-        }
+            .product-card:hover {
+                transform: translateY(-2px);
+            }
 
         .product-image {
             width: 100%;
@@ -244,12 +196,13 @@
             font-size: 12px;
         }
 
-        .home-header-image{
-            width:95%;
-            margin:1rem 0;
+        .home-header-image {
+            width: 95%;
+            margin: 1rem 0;
         }
         /* end home page style product and category */
     </style>
+    @RenderSection("Styles", required: false)
 </head>
 
 
