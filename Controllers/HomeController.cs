@@ -180,5 +180,10 @@ namespace tnki_line_sale_frontend.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult AddToCart()
+        {           
+            return Ok();
+        }
     }
 }
