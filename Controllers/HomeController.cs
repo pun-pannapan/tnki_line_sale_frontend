@@ -20,8 +20,6 @@ namespace tnki_line_sale_frontend.Controllers
             ViewBag.baseAPI = _configuration.GetValue<string>("MySetting:baseAPI");
             ViewBag.liffID = _configuration.GetValue<string>("MySetting:liffID");
         }
-
-
         public IActionResult MainPage(string state)
         {
             setDataIntoViewBag();
@@ -36,7 +34,6 @@ namespace tnki_line_sale_frontend.Controllers
             model.state = (state == null ? "" : state.Trim());
             return View(model);
         }
-
         public IActionResult Register(string state)
         {
             setDataIntoViewBag();
@@ -45,12 +42,16 @@ namespace tnki_line_sale_frontend.Controllers
             model.custData = new CustModel();
             return View(model);
         }
-
         public IActionResult ProductListByCategory(string categoryId)
         {
             ProductCategoryModel model = new ProductCategoryModel();
             model.prodCategoryId = (categoryId == null ? "1" : categoryId.Trim());
             return View(model);
+        }
+
+        public IActionResult BuyNow(string productId)
+        {
+            return View();
         }
 
         public IActionResult Index()
