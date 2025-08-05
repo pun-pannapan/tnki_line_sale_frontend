@@ -44,13 +44,31 @@ namespace tnki_line_sale_frontend.Controllers
         }
         public IActionResult ProductListByCategory(string categoryId)
         {
+            setDataIntoViewBag();
             ProductCategoryModel model = new ProductCategoryModel();
             model.prodCategoryId = (categoryId == null ? "1" : categoryId.Trim());
             return View(model);
         }
 
+        [Route("/Home/BuyNow/{productId:int}")]
         public IActionResult BuyNow(string productId)
         {
+            setDataIntoViewBag();
+            return View();
+        }
+
+        [Route("/Home/ProductDetail/{productId:int}")]
+        public ActionResult ProductDetail(int productId)
+        {
+            setDataIntoViewBag();
+            //var product = _productService.GetProductById(productId);
+            //return View(product);
+            return View();
+        }
+
+        public IActionResult ShopingCart(string productId)
+        {
+            setDataIntoViewBag();
             return View();
         }
 

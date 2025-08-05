@@ -127,82 +127,90 @@ async function getUserProfile_reAuthen(action, state, fromPage) {
                     }
                 });
                 prepEventState(_app.evTypePage, "Index", []);
+            } else if (fromPage.toUpperCase() == 'PRODUCTCATEGORY') {
+                // done
+                //getActiveCampaign(result => {
+                //    if (result == undefined || result == null || result.data == undefined || result.data == null) {
+                //        toastr["error"]("ขออภัย ยังไม่มีกิจกรรมในขณะนี้");
+                //    }
+                //});
+                //prepEventState(_app.evTypePage, "ProductListByCategory", []);
             } else if (fromPage.toUpperCase() == 'RANKING') {
-                getLeaderBoardData(result => {
+                    getLeaderBoardData(result => {
                  
-                    ko.mapping.fromJS(result.data, mapping, self.myObject);
-                    console.log("self.myObject", self.myObject);
-                    console.log("result.data.topSpenderEndDate", result.data.topSpenderEndDate);
+                        ko.mapping.fromJS(result.data, mapping, self.myObject);
+                        console.log("self.myObject", self.myObject);
+                        console.log("result.data.topSpenderEndDate", result.data.topSpenderEndDate);
 
-                    var dateFuture = Date.parse(result.data.topSpenderEndDate);
-                    var dateNow = new Date();
-                    var seconds = Math.floor((dateFuture - (dateNow)) / 1000);
-                    var minutes = Math.floor(seconds / 60);
-                    var hours = Math.floor(minutes / 60);
-                    var days = Math.floor(hours / 24);
-                    hours = hours - (days * 24);
-                    minutes = minutes - (days * 24 * 60) - (hours * 60);
+                        var dateFuture = Date.parse(result.data.topSpenderEndDate);
+                        var dateNow = new Date();
+                        var seconds = Math.floor((dateFuture - (dateNow)) / 1000);
+                        var minutes = Math.floor(seconds / 60);
+                        var hours = Math.floor(minutes / 60);
+                        var days = Math.floor(hours / 24);
+                        hours = hours - (days * 24);
+                        minutes = minutes - (days * 24 * 60) - (hours * 60);
 
-                    $('#showRemainDay').html(days);
-                    $('#showRemainHour').html(hours);
-                    $('#showRemainMin').html(minutes);
+                        $('#showRemainDay').html(days);
+                        $('#showRemainHour').html(hours);
+                        $('#showRemainMin').html(minutes);
 
-                    //show timer on leader board here
-                    //by use fancytimer
-                    //if (self.myObject.isOpenCamp() && self.myObject.isShowCounter()) {
-                    //    var options2 = {
-                    //        value: new Date(result.data.topSpenderEndDate),
-                    //        captions: {
-                    //            days: 'วัน',
-                    //            hours: 'ชั่วโมง',
-                    //            minutes: 'นาที'
-                    //        },
-                    //        showDays: 2,
-                    //        reverseAnimation: true
-                    //    };
-                    //    var ft2 = new FancyTimer(
-                    //        document.getElementById('container'),
-                    //        options2
-                    //    );                        
-                    //}
-                    //else {
-                    //    if (!self.myObject.isOpenCamp()) {
-                    //        $("#modal-notOpenCamp").modal({ backdrop: 'static', keyboard: false }, 'show');
-                    //    } else if (!self.myObject.isShowCounter()) {
-                    //        $("#modal-closeCamp").modal({ backdrop: 'static', keyboard: false }, 'show');
-                    //    }
-                    //}
+                        //show timer on leader board here
+                        //by use fancytimer
+                        //if (self.myObject.isOpenCamp() && self.myObject.isShowCounter()) {
+                        //    var options2 = {
+                        //        value: new Date(result.data.topSpenderEndDate),
+                        //        captions: {
+                        //            days: 'วัน',
+                        //            hours: 'ชั่วโมง',
+                        //            minutes: 'นาที'
+                        //        },
+                        //        showDays: 2,
+                        //        reverseAnimation: true
+                        //    };
+                        //    var ft2 = new FancyTimer(
+                        //        document.getElementById('container'),
+                        //        options2
+                        //    );                        
+                        //}
+                        //else {
+                        //    if (!self.myObject.isOpenCamp()) {
+                        //        $("#modal-notOpenCamp").modal({ backdrop: 'static', keyboard: false }, 'show');
+                        //    } else if (!self.myObject.isShowCounter()) {
+                        //        $("#modal-closeCamp").modal({ backdrop: 'static', keyboard: false }, 'show');
+                        //    }
+                        //}
                   
-                    $.unblockUI();
-                });
-                
-                prepEventState(_app.evTypePage, "Ranking", []);
-            } else if (fromPage.toUpperCase() == 'EDITCONTRACT') {
-                getCustomerData(result => {
-
-                    getProvince(prov_result => {
-                  
-                        ko.mapping.fromJS(prov_result.data, mapping, self.myObject.lstProvince);
-                        ko.mapping.fromJS(result.data.custData, mapping, self.myObject.custData);
-                        self.myObject.distId(result.data.custData.custDistId);
-                        self.myObject.subDistId(result.data.custData.custSubDistId);
                         $.unblockUI();
-                        $('#ddlProvince').trigger('change');
                     });
-                });
-            }
-        } else {
-            signOut();
-             // done
-            if (fromPage.toUpperCase() == 'REGISTER') {
-                myObject.custData.custLineId(profile.userId);
-                myObject.custData.custLineImg(profile.pictureUrl);
-                myObject.custData.custLineDisplayName(profile.displayName);
+                
+                    prepEventState(_app.evTypePage, "Ranking", []);
+                } else if (fromPage.toUpperCase() == 'EDITCONTRACT') {
+                    getCustomerData(result => {
 
+                        getProvince(prov_result => {
+                  
+                            ko.mapping.fromJS(prov_result.data, mapping, self.myObject.lstProvince);
+                            ko.mapping.fromJS(result.data.custData, mapping, self.myObject.custData);
+                            self.myObject.distId(result.data.custData.custDistId);
+                            self.myObject.subDistId(result.data.custData.custSubDistId);
+                            $.unblockUI();
+                            $('#ddlProvince').trigger('change');
+                        });
+                    });
+                }
             } else {
-                window.location.href = _app.baseURL + 'Home/Register';
+                signOut();
+                 // done
+                if (fromPage.toUpperCase() == 'REGISTER') {
+                    myObject.custData.custLineId(profile.userId);
+                    myObject.custData.custLineImg(profile.pictureUrl);
+                    myObject.custData.custLineDisplayName(profile.displayName);
+
+                } else {
+                    window.location.href = _app.baseURL + 'Home/Register';
+                }
             }
-        }
     })
 }
 function checkExistLineID(req, callback) {
