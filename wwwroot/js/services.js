@@ -859,6 +859,41 @@ function getListProduct(callback) {
         }
     });
 }
+function getProductByProdCode(prodCode ,callback) {
+    $.ajax({
+        type: "GET",
+        url: _app.baseAPI + 'Home/getProductByProdCode',
+        data: {},
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: callback,
+        failure: function (jqXHR, exception, error) {
+            $.unblockUI();
+            var msg = '';
+            if (JSON.parse(jqXHR.responseText).errors !== undefined) {
+                msg = JSON.parse(jqXHR.responseText).errors[0].Message;
+            } else {
+                msg = JSON.parse(jqXHR.responseText).message;
+            }
+
+            toastr["error"](msg);
+        },
+        error: function (jqXHR, exception, error) {
+            $.unblockUI();
+            var msg = '';
+            if (JSON.parse(jqXHR.responseText).errors !== undefined) {
+                msg = JSON.parse(jqXHR.responseText).errors[0].Message;
+            } else {
+                msg = JSON.parse(jqXHR.responseText).message;
+            }
+
+            toastr["error"](msg);
+        }
+    });
+}
 function getProvince(callback) {
     $.ajax({
         type: "GET",
