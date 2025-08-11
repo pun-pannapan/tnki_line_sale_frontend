@@ -58,11 +58,11 @@ namespace tnki_line_sale_frontend.Controllers
             return View();
         }
 
-        [Route("/Home/ProductDetail/{productId:int}")]
-        public ActionResult ProductDetail(int productId)
+        [Route("/Home/ProductDetail/{productCode:int}")]
+        public ActionResult ProductDetail(int productCode)
         {
             setDataIntoViewBag();
-            ViewBag.ProductId = productId;
+            ViewBag.ProductCode = productCode;
             var model = new ProductDataModel()
             {
                 //prodCode = Convert.ToString(productId),

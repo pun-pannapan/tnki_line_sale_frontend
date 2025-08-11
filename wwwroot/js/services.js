@@ -155,50 +155,20 @@ async function getUserProfile_reAuthen(action, state, fromPage) {
                         $('#showRemainHour').html(hours);
                         $('#showRemainMin').html(minutes);
 
-                        //show timer on leader board here
-                        //by use fancytimer
-                        //if (self.myObject.isOpenCamp() && self.myObject.isShowCounter()) {
-                        //    var options2 = {
-                        //        value: new Date(result.data.topSpenderEndDate),
-                        //        captions: {
-                        //            days: 'วัน',
-                        //            hours: 'ชั่วโมง',
-                        //            minutes: 'นาที'
-                        //        },
-                        //        showDays: 2,
-                        //        reverseAnimation: true
-                        //    };
-                        //    var ft2 = new FancyTimer(
-                        //        document.getElementById('container'),
-                        //        options2
-                        //    );                        
-                        //}
-                        //else {
-                        //    if (!self.myObject.isOpenCamp()) {
-                        //        $("#modal-notOpenCamp").modal({ backdrop: 'static', keyboard: false }, 'show');
-                        //    } else if (!self.myObject.isShowCounter()) {
-                        //        $("#modal-closeCamp").modal({ backdrop: 'static', keyboard: false }, 'show');
-                        //    }
-                        //}
-                  
                         $.unblockUI();
                     });
                 
                     prepEventState(_app.evTypePage, "Ranking", []);
-                } else if (fromPage.toUpperCase() == 'EDITCONTRACT') {
-                    getCustomerData(result => {
+            } else if (fromPage.toUpperCase() == 'EDITCONTRACT') {
 
-                        getProvince(prov_result => {
-                  
-                            ko.mapping.fromJS(prov_result.data, mapping, self.myObject.lstProvince);
-                            ko.mapping.fromJS(result.data.custData, mapping, self.myObject.custData);
-                            self.myObject.distId(result.data.custData.custDistId);
-                            self.myObject.subDistId(result.data.custData.custSubDistId);
-                            $.unblockUI();
-                            $('#ddlProvince').trigger('change');
-                        });
-                    });
-                }
+                    //getCustomerData(result => {
+                    //    ko.mapping.fromJS(result.data.custData, mapping, self.myObject.custData);
+                    //});
+            } else if (fromPage.toUpperCase() == 'PRODUCTDETAIL') {
+                    //getProductByProdCode(result => {
+
+                    //});
+            }
             } else {
                 signOut();
                  // done
@@ -862,7 +832,7 @@ function getListProduct(callback) {
 function getProductByProdCode(prodCode ,callback) {
     $.ajax({
         type: "GET",
-        url: _app.baseAPI + 'Home/getProductByProdCode',
+        url: _app.baseAPI + 'Home/getProductByProdCode?prodCode=' + prodCode,
         data: {},
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('TNKILINESALE:OUTWRT:TOKEN')
