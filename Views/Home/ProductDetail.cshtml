@@ -65,11 +65,11 @@
             <img class="img-fluid w-100 d-block"
                  data-bind="attr: { src: myObject.prodImage, alt: myObject.prodName }" />
             <!-- ป้ายจำนวนแพ็ค (ถ้ามี) -->
-            <div class="badge badge-primary promo-badge"
-                 data-bind="text: myObject.prodPackSize, visible: myObject.prodPackSize"></div>
+            @* <div class="badge badge-primary promo-badge"
+                 data-bind="text: myObject.prodPackSize, visible: myObject.prodPackSize"></div> *@
         </div>
 
-        <div class="card-body">
+        <div class="card-body">   
             <!-- Remark -->
             <div class="text-primary small mb-1"
                  data-bind="text: myObject.prodRemark, visible: myObject.prodRemark"></div>
@@ -83,7 +83,7 @@
             </div>
 
             <!-- Quantity -->
-            <div class="mb-3">
+            <div>
                 <div class="d-flex align-items-center">
                     <label class="mb-0 font-weight-bold mr-3">Quantity</label>
                     <div class="d-flex align-items-center qty-control">
@@ -96,7 +96,7 @@
 
             <!-- รายละเอียดสินค้า (HTML) -->
             <div data-bind="visible: myObject.prodDesc">
-                <span class="px-3 py-2" data-bind="html: myObject.prodDesc"></span>
+                <span class="px-3" data-bind="html: myObject.prodDesc"></span>
             </div>
 
             <!-- ปุ่ม -->
@@ -153,35 +153,30 @@
                 };
 
                 self.buyNow = function () {
-                    var productCode = @ViewBag.ProductCode
+                    var productCode = @ViewBag.ProductCode;
                     window.location.href = '/Home/BuyNow/' + productCode ;
                 };
 
                 self.loadProduct = function () {
-                    var code =  @ViewBag.ProductCode
+                    var code =  @ViewBag.ProductCode;
                     if (!code) return;
                     blockUI();
                     getProductByProdCode(code, function (result) {
                         try {
                             var data = result && (result.data || result);
-                            console.log("Data :", data);
                             ko.mapping.fromJS(data, {}, self.myObject);
                         } finally {
                             $.unblockUI();
                         }
                     });
                 };
-
-                // เรียกใช้ loadProduct ตอนสร้าง ViewModel
-                self.loadProduct();
             }
 
             var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
-            console.log(model);
             var vm = new ViewModel(model)
             ko.applyBindings(vm);
             reauthenLiff('home/ProductDetail', '', 'PRODUCTDETAIL');
-            // vm.loadProduct();
+            vm.loadProduct();
         });
     </script>
 }
