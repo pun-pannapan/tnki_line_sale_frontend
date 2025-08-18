@@ -1,0 +1,74 @@
+﻿@model tnki_line_sale_frontend.Models.RewardModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var jsonData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+}
+@section Styles {
+    <style>
+        .redeem-item {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .redeem-item > div:first-child {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .redeem-item .text {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+}
+<div class="wrapper body-shadow main-body">
+    <div class="main-body-inner-page" style="padding: 20px; padding-bottom: 100px;">
+        <div class="text-center">
+            <img class="img-fluid" src="~/assets/img/logo.png" alt="" width="100">
+        </div>
+        <div class="profile-box-new mt-2 " align="center">
+            <div class="profile-img">
+                <img data-bind="attr: {src: myObject.custData.custLineImg}" alt="">
+            </div>
+            <div class="text profile-point" align="left">
+                <h3 class="mb-2" style="font-size: 1.2rem;">สวัสดีคุณ <span data-bind="text: myObject.custData.custLineDisplayName"></span></h3>
+                <div class="point">
+                    ตอนนี้คุณมียอดซื้อสินค้า<br />
+                    <span style="color: #61bceb !important;" data-bind="number: myObject.totalPoint, precious: 0"></span> บาท
+                </div>
+            </div>
+        </div>      
+        <div align="center" style="color: #3B3B3B; font-weight: bold;">* โปรโมชันล่าสุด</div>
+        <div class="redeem-item bg-white p-4 rounded" style="display: flex; flex-direction: column;">
+            <div style="width: 100%; margin-bottom: 15px;">
+                <img class="img-fluid" src="~/assets/img/promotion/promotion1.jpg" style="border-radius: 12px;" />
+            </div>
+            <div class="text" style="width: 100%; text-align: center;">
+                <h2>ซื้อครบ 500 บาท ได้ gift voucher 100 บาท</h2>
+                <p>คูปองของขวัญ</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var mapping = {
+            }
+            $(document).ready(function () {
+                function ViewModel(data) {
+                    self.myObject = this;
+                    ko.mapping.fromJS(data, {}, self.myObject);
+                 }
+                var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+                ko.applyBindings(new ViewModel(model));
+                reauthenLiff('home/Reward', '', 'Reward');
+                $('#reward').css({
+                    "text-decoration": "underline"
+                });
+            });
+        });
+    </script>
+}

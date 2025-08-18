@@ -1,7 +1,264 @@
-﻿@model tnki_line_sale_frontend.Models.ProductCategoryModel
+﻿@model tnki_line_sale_frontend.Models.ProductDataModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var jsonData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
 }
 
-buy now page
+@section Styles {
+    <style>
+        /* Card */
+        .buy-card {
+            background: #fff;
+            border: 1px solid #efefef;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        /* รูปสินค้า (มือถือ) */
+        .product-thumb {
+            width: 72px;
+            height: 72px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* ตัวอักษร */
+        .product-title-buynow {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        /* ชื่อสินค้า */
+        .meta-label {
+            font-size: .95rem;
+            color: #6c757d;
+        }
+        /* คำว่า “รหัสสินค้า” */
+        .sku {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: .02em;
+        }
+        /* รหัสสินค้า */
+        .pack {
+            font-size: 1rem;
+            color: #6b7280;
+        }
+        /* ขนาดบรรจุ */
+
+        /* ราคา */
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-top: .50rem;
+        }
+
+        .price-label {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: #6c757d;
+        }
+
+        .price-value {
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+        /* หนาและใหญ่ขึ้น */
+
+        /* ปุ่มจำนวน – แตะง่าย */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid #d0d5dd;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        #qty-display {
+            min-width: 28px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* ปุ่ม Buy Now (เล็กกว่าปุ่มใหญ่ของบูตสแตรป) */
+        .btn-buy {
+            padding: .50rem 0.85rem;
+            font-size: 1.125rem;
+            border-radius: 10px;
+        }
+
+        .btn-dark {
+            background: #1f2328;
+            border-color: #1f2328;
+        }
+
+        .btn-dark:hover {
+            filter: brightness(.95);
+        }
+
+        /* ยูทิลิตี */
+        .text-truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* รูปสินค้าใหญ่ขึ้น */
+        .product-thumb {
+            width: 35%;
+            height: auto;
+        }
+    </style>
+}
+
+
+<div class="buy-card" data-bind="with: myObject">
+    <div class="text-center my-3">
+        <img class="img-fluid" src="/assets/img/logo.png" alt="" width="100">
+    </div>
+    <hr class="mt-1 mb-3">
+    <div class="d-flex align-items-start">
+        <!-- รูป -->
+        <img class="product-thumb mr-3" data-bind="attr:{src: prodImage, alt: prodName}" />
+
+        <div class="flex-grow-1">
+            <!-- ชื่อ/รหัส/แพ็ค -->
+            <div class="flex-grow-1">
+                <h4 class="mb-1 text-truncate-2 product-title-buynow" data-bind="text: prodName"></h4>
+
+                <span class="meta-label">รหัสสินค้า</span>
+                <span class="sku mb-2" data-bind="text: prodCode"></span>
+
+                <div class="pack mb-2" data-bind="visible: prodPackSize">
+                    ขนาดบรรจุ: <span data-bind="text: prodPackSize"></span>
+                </div>
+            </div>
+
+            <!-- จำนวน -->
+            <div class="d-flex align-items-center mt-2">
+                <label class="mb-0 font-weight-bold mr-3">จำนวน</label>
+                <div class="qty-control">
+                    <button type="button" class="btn-circle" data-bind="click: $parent.decQty" aria-label="decrease">−</button>
+                    <span id="qty-display" data-bind="text: $parent.qty">1</span>
+                    <button type="button" class="btn-circle" data-bind="click: $parent.incQty" aria-label="increase">+</button>
+                </div>
+            </div>
+
+            <!-- ราคา (อยู่ล่าง) -->
+            <div class="price-row">
+                <div class="price-label">ราคา</div>
+                <div class="price price-value" data-bind="text: $parent.formattedPrice"></div>
+            </div>
+
+            <hr class="my-2">
+
+            <!-- ปุ่ม -->
+            <div class="d-flex">
+                <button type="button" class="btn btn-dark btn-buy flex-fill"
+                        data-bind="click: $parent.buyNow">
+                    Buy Now
+                </button>
+            </div>
+
+            <!-- ลิงก์ภายนอก -->
+            <div class="text-right mt-2">
+                <a class="btn btn-link p-0" style=" font-size: 1rem;font-weight: 600;"
+                   data-bind="visible: prodExternalLink, attr:{href: prodExternalLink}"
+                   target="_blank" rel="noopener">ดูรายละเอียดเพิ่มเติม</a>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="redeem-item bg-white p-4 rounded mb-3" style="display: flex; flex-direction: column;">
+        <div style="width: 100%; margin-bottom: 15px;">
+            <img class="img-fluid" src="~/assets/img/promotion/promotion1.jpg" style="border-radius: 12px;" />
+        </div>
+        <div class="text" style="width: 100%; text-align: center;">
+            <h2>ซื้อครบ 500 บาท ได้ gift voucher 100 บาท</h2>
+            <p>คูปองของขวัญ</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+            $(function () {
+            var mapping = {}
+
+            function ViewModel(data) {
+                var self = this; // แก้ไข: ใช้ var self = this แทน self.myObject = this
+                self.myObject = {};
+
+                self.qty = ko.observable(1);
+                self.incQty = function(){ self.qty(self.qty() + 1); };
+                self.decQty = function(){ if (self.qty() > 1) self.qty(self.qty() - 1); };
+
+                self.formattedPrice = ko.pureComputed(function () {
+                    var p = Number(self.myObject.prodPrice() || 0);
+                    return '฿' + p.toLocaleString('th-TH');
+                });
+
+                ko.mapping.fromJS(data, {}, self.myObject);
+
+                self.buyNow = function () {
+                    var productCode = @ViewBag.ProductCode;
+                    window.location.href = '/Home/BuyNowPost/' + productCode ;
+                };
+
+                self.loadProduct = function () {
+                    var code =  @ViewBag.ProductCode;
+                    if (!code) return;
+                    blockUI();
+                    getProductByProdCode(code, function (result) {
+                        try {
+                            var data = result && (result.data || result);
+                            ko.mapping.fromJS(data, {}, self.myObject);
+                        } finally {
+                            $.unblockUI();
+                        }
+                    });
+                };
+            }
+
+            var minusBtns = document.querySelectorAll('.qty-minus');
+            var plusBtns = document.querySelectorAll('.qty-plus');
+
+            minusBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var input = this.parentElement.querySelector('.qty-input');
+                var val = parseInt(input.value || '0', 10);
+                input.value = Math.max(1, val - 1);
+            });
+            });
+
+            plusBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var input = this.parentElement.querySelector('.qty-input');
+                var val = parseInt(input.value || '0', 10);
+                input.value = Math.max(1, val + 1);
+            });
+            });
+
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            var vm = new ViewModel(model)
+            ko.applyBindings(vm);
+            reauthenLiff('home/ProductDetail', '', 'PRODUCTDETAIL');
+            vm.loadProduct();
+        });
+    </script>
+}

@@ -55,7 +55,21 @@ namespace tnki_line_sale_frontend.Controllers
         public IActionResult BuyNow(string productId)
         {
             setDataIntoViewBag();
-            return View();
+            ViewBag.ProductCode = productId;
+            //var model = new ProductDataModel();
+            var model = new ProductDataModel() {
+                //prodCode = "2",
+                // prodName = "เรนเจอร์ นกเหยี่ยว ยากันยุงสูตรใหม่ 8 ชม. 10 ขด แซนดัลวูด (5 กล่อง)",
+                // prodDesc = "<p><strong>***ผู้ประกอบการที่อยู่ในระบบ VAT รบกวนแจ้งข้อมูลกับเจ้าหน้าที่ เพื่อออกใบกำกับภาษี ทันที***</strong></p><p><strong>(** ทางร้านขอสงวนสิทธิ์ ในการออกใบกำกับภาษีย้อนหลัง**)</strong></p><br /><p><strong>ยาจุดกันยุงควันน้อยเจ้าแรกยอดขายอันดับ 1 ต่อเนื่อง 6 ปีซ้อน</strong></p><ul><li><strong>&ldquo;เรนเจอร์ เอ็กซ์ตรีม&rdquo;</strong> เร็วสุด แรงสุดของการไล่ยุง กลิ่นแซนดัลวู้ด</li><li>สูตรประสิทธิภาพมีส่วนผสมของ เมโทฟลูทริน (Metofluthrin) 0.05% ออกฤทธิ์เฉพาะกับแมลงสามารถ ไล่ยุงดีที่สุดในตลาดยาจุดกันยุง</li><li>ปลอดภัยรับรองมาตราฐานจาก อ.ย.ไทย เลขขึ้นทะเบียน วอส .656/2565</li><li>ไม่เป็นอันตรายต่อสัตว์เลี้ยงลูกด้วยนมใช้ได้ทั้งคนและสัตว์เลี้ยง</li><li>ควันน้อย ช่วยลดการเกิด PM 2.5</li><li>สามารถไล่ยุงร้ายได้ 4 ชนิด ได้แก่ยุงลายบ้าน ยุงลายสวน ยุงรำคาญ และยุงก้นปล่อง</li></ul>",
+                // prodImage = "/assets/img/product/16.png",
+                // prodPrice =101,
+                // prodPackSize = "15x15x5 cm.",
+                // prodStatus = "ACT",
+                // prodRemark = "",
+                // prodSeq = 1,
+                // prodExternalLink = "https://www.thanatkorn.com/%E0%B9%80%E0%B8%A3%E0%B8%99%E0%B9%80%E0%B8%88%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%99%E0%B8%81%E0%B9%80%E0%B8%AB%E0%B8%A2%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7"
+            };
+            return View(model);
         }
 
         [Route("/Home/ProductDetail/{productCode:int}")]
@@ -175,6 +189,16 @@ namespace tnki_line_sale_frontend.Controllers
             return View(model);
         }
         public IActionResult Reward()
+        {
+            setDataIntoViewBag();
+            RewardModel model = new RewardModel();
+            model.lstRewardLowTier = new List<RewardData>();
+            model.lstRewardHighTier = new List<RewardData>();
+            model.custData = new CustModel();
+            return View(model);
+        }
+
+        public IActionResult Promotion()
         {
             setDataIntoViewBag();
             RewardModel model = new RewardModel();
